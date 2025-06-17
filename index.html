@@ -117,7 +117,7 @@
       text-align: left;
       flex-wrap: wrap;
     }
-    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info {
+    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info { /* .formazione è qui ma il blocco HTML è stato rimosso */
       background: #222;
       padding: 15px;
       border-radius: 10px;
@@ -131,18 +131,18 @@
       box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5);
     }
 
-    /* Stile per Giocatori e Formazione (lista più strutturata) */
-    .giocatori ul, .formazione ul {
+    /* Stile per Giocatori (lista più strutturata) */
+    .giocatori ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    .giocatori li, .formazione li {
+    .giocatori li {
       margin-bottom: 8px;
       font-size: 1.05em;
       line-height: 1.4em;
     }
-    .giocatori li strong, .formazione li strong {
+    .giocatori li strong {
       color: #0f0;
     }
 
@@ -321,22 +321,10 @@
         <div class="giocatori">
           <h3>Giocatori</h3>
           <ul>
-            <li><strong>Portiere:</strong> Marchetti Cristian</li>
-            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo</li>
-            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
-            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
-            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
-          </ul>
-        </div>
-        <div class="formazione">
-          <h3>Formazione</h3>
-          <ul>
-            <li><strong>Portiere:</strong> Marchetti Cristian</li>
-            <li><strong>Difensori:** Davide Ferrera, Francesco Schembari, Giulio Campo</li>
-            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
-            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
-            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
-            <li><strong>Allenatore:</strong> Coach Rossi</li>
+            <li><strong>Portiere:</strong> Ciccio</li>
+            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
+            <li><strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
+            <li><strong>Attaccanti:</strong> Cristian, Emanuele Licco, Andres Marchetti</li>
           </ul>
         </div>
       </div>
@@ -447,5 +435,4 @@
     };
   </script>
 </body>
-</html>
 </html>
