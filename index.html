@@ -105,7 +105,7 @@
     }
 
     /* Tutte le sezioni interne vengono comunque nascoste inizialmente */
-    .squadra, #home, .notizie, .storia, .contatti, #maglie {
+    .squadra, #home, .notizie, .storia, .contatti, #maglie, #statistiche {
       display: none;
     }
 
@@ -117,7 +117,7 @@
       flex-wrap: wrap;
       align-items: center; /* Centra gli elementi lungo l'asse trasversale (verticale, se c'è spazio), cruciale per l'allineamento dei blocchi */
     }
-    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item {
+    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-item {
       background: #222;
       padding: 15px;
       border-radius: 10px;
@@ -126,7 +126,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover {
+    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5);
     }
@@ -260,6 +260,49 @@
         text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
     }
 
+    /* Stili per la nuova sezione Statistiche */
+    #statistiche .statistiche-item {
+        width: 450px; /* Larghezza maggiore per le statistiche */
+        text-align: left;
+        border-left: 5px solid #0f0;
+    }
+    #statistiche .statistiche-item h3 {
+        color: #0f0;
+        margin-top: 0;
+        border-bottom: 1px dashed #444;
+        padding-bottom: 5px;
+    }
+    #statistiche .statistiche-item ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+    #statistiche .statistiche-item ul li {
+        margin-bottom: 8px;
+        font-size: 1.05em;
+        line-height: 1.4em;
+    }
+    #statistiche .statistiche-item ul li strong {
+        color: #0f0;
+    }
+    #statistiche .statistiche-item .classifica h4 {
+        color: #0f0;
+        margin-top: 20px;
+        border-top: 1px dashed #444;
+        padding-top: 10px;
+    }
+    #statistiche .statistiche-item .classifica ol {
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+    #statistiche .statistiche-item .classifica ol li {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    #statistiche .statistiche-item .classifica ol li span {
+        color: #0f0;
+    }
+
 
     footer {
       background: linear-gradient(to right, #0a0, #0c0);
@@ -331,7 +374,7 @@
         flex-direction: column;
         align-items: center;
       }
-      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item {
+      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-item {
         width: 90%;
       }
       nav a {
@@ -353,7 +396,7 @@
     <a href="#home" onclick="mostraSezione('home'); return false;">Home</a>
     <a href="#squadra" onclick="mostraSezione('squadra'); return false;">Squadra</a>
     <a href="#maglie" onclick="mostraSezione('maglie'); return false;">Maglie</a>
-    <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
+    <a href="#statistiche" onclick="mostraSezione('statistiche'); return false;">Statistiche</a> <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
     <a href="#storia" onclick="mostraSezione('storia'); return false;">Storia</a>
     <a href="#contatti" onclick="mostraSezione('contatti'); return false;">Contatti</a>
   </nav>
@@ -374,7 +417,7 @@
             <li><strong>Portiere:</strong> Ciccio</li>
             <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
             <li><strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
-            <li><strong>Attaccanti:</b> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li>
+            <li><strong>Attaccanti:</strong> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li>
           </ul>
         </div>
       </div>
@@ -394,10 +437,50 @@
         </div>
     </section>
 
+    <section id="statistiche">
+        <h2>Statistiche Giocatori</h2>
+        <div class="contenuto">
+            <div class="statistiche-item" style="width: 400px;">
+                <h3>Gol e Assist Totali</h3>
+                <ul>
+                    <li><strong>Scotto:</strong> 1 Gol, 0 Assist</li>
+                    <li><strong>Cristian:</strong> 132 Gol, 55 Assist</li>
+                    <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
+                    <li><strong>Vinci:</strong> 37 Gol, 45 Assist</li>
+                    <li><strong>Davide:</strong> 20 Gol, 47 Assist</li>
+                    <li><strong>Giovanni:</strong> 5 Gol, 4 Assist</li>
+                    <li><strong>Ciccio:</strong> 2 Gol, 2 Assist</li>
+                    <li><strong>Nicolò:</strong> 8 Gol, 20 Assist</li>
+                    <li><strong>Stefano:</strong> 6 Gol, 5 Assist</li>
+                    <li><strong>Giulio:</strong> 44 Gol, 29 Assist</li>
+                    <li><strong>Luca:</strong> 7 Gol, 5 Assist</li>
+                    <li><strong>Andres:</strong> 61 Gol, 59 Assist</li>
+                    <li><strong>Lorenzo:</strong> 13 Gol, 8 Assist</li>
+                    <li><strong>Ciccio.:</strong> 1 Assist</li>
+                </ul>
+
+                <div class="classifica">
+                    <h4>Top 3 Marcatori</h4>
+                    <ol>
+                        <li>Cristian: <span>132 Gol</span></li>
+                        <li>Licco: <span>92 Gol</span></li>
+                        <li>Andres: <span>61 Gol</span></li>
+                    </ol>
+                    <h4>Top 3 Assist-man</h4>
+                    <ol>
+                        <li>Andres: <span>59 Assist</span></li>
+                        <li>Licco: <span>58 Assist</span></li>
+                        <li>Cristian: <span>55 Assist</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="notizie">
       <h2>Ultime Notizie</h2>
       <div class="contenuto">
-        <div class="notizia-item" style="width: 400px;"> <h3>Pagellino Partita Sabato 14 Giugno</h3>
+        <div class="notizia-item" style="width: 400px;">
+          <h3>Pagellino Partita Sabato 14 Giugno</h3>
           <div class="pagellino-container">
             <p>Un'altra grande giornata di calcio per il Bear F.C.! La squadra ha dimostrato grinta e determinazione in campo, portando a casa un risultato importante. Ecco i voti della partita:</p>
             <ul>
@@ -420,8 +503,9 @@
           </div>
           <small>Data: 14 Giugno 2025</small>
         </div>
-        </div>
+      </div>
     </section>
+
     <section id="storia">
       <h2>La Nostra Storia</h2>
       <div class="contenuto">
@@ -453,7 +537,7 @@
             <h3>Social Media</h3>
             <p><a href="#" target="_blank">Facebook</a></p>
             <p><a href="#" target="_blank">Instagram</a></p>
-            <p><a href="#" target="_blank">Twitter</a></p>
+            <a href="#" target="_blank">Twitter</a></p>
         </div>
       </div>
     </section>
@@ -496,6 +580,7 @@
       document.getElementById('storia').style.display = 'none';
       document.getElementById('contatti').style.display = 'none';
       document.getElementById('maglie').style.display = 'none';
+      document.getElementById('statistiche').style.display = 'none'; // Nascondi anche la nuova sezione
 
       document.getElementById(id).style.display = 'block';
     }
