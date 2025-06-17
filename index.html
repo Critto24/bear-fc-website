@@ -261,45 +261,71 @@
     }
 
     /* Stili per la nuova sezione Statistiche */
-    #statistiche .statistiche-item {
-        width: 450px; /* Larghezza maggiore per le statistiche */
-        text-align: left;
-        border-left: 5px solid #0f0;
+    #statistiche .statistiche-container { /* Nuovo contenitore flex per il layout interno */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center; /* Centra orizzontalmente tutti i sub-item */
+        gap: 30px; /* Spazio tra i sub-item */
+        align-items: flex-start; /* Allinea in alto gli elementi se di altezza diversa */
     }
-    #statistiche .statistiche-item h3 {
+
+    #statistiche .statistiche-list,
+    #statistiche .statistiche-classifiche {
+        background: #222;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 5px solid #0f0;
+        text-align: left;
+    }
+    #statistiche .statistiche-list {
+        flex: 1; /* Prende lo spazio disponibile */
+        min-width: 280px; /* Larghezza minima */
+        max-width: 400px; /* Larghezza massima */
+    }
+    #statistiche .statistiche-classifiche {
+        flex: 1; /* Prende lo spazio disponibile */
+        min-width: 280px; /* Larghezza minima */
+        max-width: 350px; /* Larghezza massima */
+    }
+
+    #statistiche .statistiche-list h3,
+    #statistiche .statistiche-classifiche h3 {
         color: #0f0;
         margin-top: 0;
         border-bottom: 1px dashed #444;
         padding-bottom: 5px;
     }
-    #statistiche .statistiche-item ul {
+    #statistiche .statistiche-list ul {
         list-style: none;
         padding: 0;
         margin: 10px 0;
     }
-    #statistiche .statistiche-item ul li {
+    #statistiche .statistiche-list ul li {
         margin-bottom: 8px;
         font-size: 1.05em;
         line-height: 1.4em;
     }
-    #statistiche .statistiche-item ul li strong {
+    #statistiche .statistiche-list ul li strong {
         color: #0f0;
     }
-    #statistiche .statistiche-item .classifica h4 {
+    #statistiche .statistiche-classifiche h4 {
         color: #0f0;
         margin-top: 20px;
         border-top: 1px dashed #444;
         padding-top: 10px;
     }
-    #statistiche .statistiche-item .classifica ol {
+    #statistiche .statistiche-classifiche ol {
         padding-left: 20px;
         margin-top: 10px;
     }
-    #statistiche .statistiche-item .classifica ol li {
+    #statistiche .statistiche-classifiche ol li {
         margin-bottom: 5px;
         font-weight: bold;
     }
-    #statistiche .statistiche-item .classifica ol li span {
+    #statistiche .statistiche-classifiche ol li span {
         color: #0f0;
     }
 
@@ -377,6 +403,17 @@
       .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-item {
         width: 90%;
       }
+      /* Per le statistiche, su mobile, vogliamo che i due blocchi vadano uno sotto l'altro e si allineino */
+      #statistiche .statistiche-container {
+          flex-direction: column;
+          align-items: center; /* Centra i blocchi stessi */
+          gap: 20px; /* Ridotto per mobile */
+      }
+      #statistiche .statistiche-list,
+      #statistiche .statistiche-classifiche {
+          width: 90%; /* Prendono quasi tutta la larghezza disponibile */
+          max-width: none; /* Rimuove il max-width per consentire maggiore adattamento */
+      }
       nav a {
         margin: 5px 10px;
         padding: 6px 12px;
@@ -396,7 +433,8 @@
     <a href="#home" onclick="mostraSezione('home'); return false;">Home</a>
     <a href="#squadra" onclick="mostraSezione('squadra'); return false;">Squadra</a>
     <a href="#maglie" onclick="mostraSezione('maglie'); return false;">Maglie</a>
-    <a href="#statistiche" onclick="mostraSezione('statistiche'); return false;">Statistiche</a> <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
+    <a href="#statistiche" onclick="mostraSezione('statistiche'); return false;">Statistiche</a>
+    <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
     <a href="#storia" onclick="mostraSezione('storia'); return false;">Storia</a>
     <a href="#contatti" onclick="mostraSezione('contatti'); return false;">Contatti</a>
   </nav>
@@ -439,11 +477,9 @@
 
     <section id="statistiche">
         <h2>Statistiche Giocatori</h2>
-        <div class="contenuto">
-            <div class="statistiche-item" style="width: 400px;">
+        <div class="contenuto statistiche-container"> <div class="statistiche-list">
                 <h3>Gol e Assist Totali</h3>
                 <ul>
-                    <li><strong>Scotto:</strong> 1 Gol, 0 Assist</li>
                     <li><strong>Cristian:</strong> 132 Gol, 55 Assist</li>
                     <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
                     <li><strong>Vinci:</strong> 37 Gol, 45 Assist</li>
@@ -458,21 +494,22 @@
                     <li><strong>Lorenzo:</strong> 13 Gol, 8 Assist</li>
                     <li><strong>Ciccio.:</strong> 1 Assist</li>
                 </ul>
+            </div>
 
-                <div class="classifica">
-                    <h4>Top 3 Marcatori</h4>
-                    <ol>
-                        <li>Cristian: <span>132 Gol</span></li>
-                        <li>Licco: <span>92 Gol</span></li>
-                        <li>Andres: <span>61 Gol</span></li>
-                    </ol>
-                    <h4>Top 3 Assist-man</h4>
-                    <ol>
-                        <li>Andres: <span>59 Assist</span></li>
-                        <li>Licco: <span>58 Assist</span></li>
-                        <li>Cristian: <span>55 Assist</span></li>
-                    </ol>
-                </div>
+            <div class="statistiche-classifiche">
+                <h3>Classifiche</h3>
+                <h4>Top 3 Marcatori</h4>
+                <ol>
+                    <li>Cristian: <span>132 Gol</span></li>
+                    <li>Licco: <span>92 Gol</span></li>
+                    <li>Andres: <span>61 Gol</span></li>
+                </ol>
+                <h4>Top 3 Assist-man</h4>
+                <ol>
+                    <li>Andres: <span>59 Assist</span></li>
+                    <li>Licco: <span>58 Assist</span></li>
+                    <li>Cristian: <span>55 Assist</span></li>
+                </ol>
             </div>
         </div>
     </section>
@@ -537,7 +574,7 @@
             <h3>Social Media</h3>
             <p><a href="#" target="_blank">Facebook</a></p>
             <p><a href="#" target="_blank">Instagram</a></p>
-            <a href="#" target="_blank">Twitter</a></p>
+            <p><a href="#" target="_blank">Twitter</a></p>
         </div>
       </div>
     </section>
@@ -580,7 +617,7 @@
       document.getElementById('storia').style.display = 'none';
       document.getElementById('contatti').style.display = 'none';
       document.getElementById('maglie').style.display = 'none';
-      document.getElementById('statistiche').style.display = 'none'; // Nascondi anche la nuova sezione
+      document.getElementById('statistiche').style.display = 'none';
 
       document.getElementById(id).style.display = 'block';
     }
