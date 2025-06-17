@@ -105,7 +105,7 @@
     }
 
     /* Tutte le sezioni interne vengono comunque nascoste inizialmente */
-    .squadra, #home, .notizie, .storia, .contatti {
+    .squadra, #home, .notizie, .storia, .contatti, #maglie { /* Aggiunto #maglie */
       display: none;
     }
 
@@ -117,7 +117,7 @@
       text-align: left;
       flex-wrap: wrap;
     }
-    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info {
+    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item { /* Aggiunto .maglia-item */
       background: #222;
       padding: 15px;
       border-radius: 10px;
@@ -126,23 +126,23 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover {
+    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover { /* Aggiunto .maglia-item */
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5);
     }
 
-    /* Stile per Giocatori e Formazione (lista più strutturata) */
-    .giocatori ul, .formazione ul {
+    /* Stile per Giocatori (lista più strutturata) */
+    .giocatori ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    .giocatori li, .formazione li {
+    .giocatori li {
       margin-bottom: 8px;
       font-size: 1.05em;
       line-height: 1.4em;
     }
-    .giocatori li strong, .formazione li strong {
+    .giocatori li strong {
       color: #0f0;
     }
 
@@ -195,6 +195,28 @@
         color: #fff;
     }
 
+    /* Stile per la nuova sezione Maglie */
+    #maglie .maglia-item {
+        width: 300px; /* O quanto preferisci */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #maglie .maglia-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+        margin-bottom: 10px;
+    }
+    #maglie .maglia-item p {
+        font-size: 1.1em;
+        color: #0f0;
+        font-weight: bold;
+    }
+
+
     footer {
       background: linear-gradient(to right, #0a0, #0c0);
       padding: 15px;
@@ -216,8 +238,8 @@
       margin: 0 auto;
     }
 
-    /* NUOVO STILE PER L'IMMAGINE NELLA SEZIONE HOME */
-    .home-image {
+    /* NUOVO STILE PER L'IMMAGINE NELLA SEZIONE HOME - RIMOSSO */
+    /* .home-image {
       max-width: 80%;
       height: auto;
       border-radius: 10px;
@@ -229,7 +251,7 @@
 
     .home-image:hover {
       transform: scale(1.02);
-    }
+    } */
     /* FINE NUOVO STILE */
 
     #home h2 {
@@ -281,7 +303,7 @@
         flex-direction: column;
         align-items: center;
       }
-      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info {
+      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item { /* Aggiunto .maglia-item */
         width: 90%;
       }
       nav a {
@@ -302,7 +324,7 @@
   <nav>
     <a href="#home" onclick="mostraSezione('home'); return false;">Home</a>
     <a href="#squadra" onclick="mostraSezione('squadra'); return false;">Squadra</a>
-    <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
+    <a href="#maglie" onclick="mostraSezione('maglie'); return false;">Maglie</a> <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
     <a href="#storia" onclick="mostraSezione('storia'); return false;">Storia</a>
     <a href="#contatti" onclick="mostraSezione('contatti'); return false;">Contatti</a>
   </nav>
@@ -311,7 +333,6 @@
     <section id="home">
       <h2>Benvenuti nel sito ufficiale del Bear F.C.</h2>
       <p>Segui le novità e la storia della nostra squadra! Rimani aggiornato su partite, risultati e curiosità!</p>
-      <img src="maglia-calcio.jpg" alt="Maglia da calcio Bear F.C." class="home-image">
       <button onclick="mostraSezione('squadra')">Scopri la Squadra</button>
     </section>
 
@@ -321,27 +342,24 @@
         <div class="giocatori">
           <h3>Giocatori</h3>
           <ul>
-            <li><strong>Portiere:</strong> Marchetti Cristian</li>
-            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo</li>
-            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
-            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
-            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
-          </ul>
-        </div>
-        <div class="formazione">
-          <h3>Formazione</h3>
-          <ul>
-            <li><strong>Portiere:</strong> Marchetti Cristian</li>
-            <li><strong>Difensori:** Davide Ferrera, Francesco Schembari, Giulio Campo</li>
-            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
-            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
-            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
-            <li><strong>Allenatore:</strong> Coach Rossi</li>
+            <li><strong>Portiere:</strong> Ciccio</li>
+            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
+            <li><strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
+            <li><strong>Attaccanti:</strong> Cristian, Emanuele Licco, Andres Marchetti</li>
           </ul>
         </div>
       </div>
     </section>
 
+    <section id="maglie">
+        <h2>Le Nostre Maglie</h2>
+        <div class="contenuto">
+            <div class="maglia-item">
+                <img src="maglia-calcio.jpg" alt="Maglia Bear F.C. 2024/2025">
+                <p>Stagione 2024/2025</p>
+            </div>
+            </div>
+    </section>
     <section id="notizie">
       <h2>Ultime Notizie</h2>
       <div class="contenuto">
@@ -436,6 +454,7 @@
       document.getElementById('notizie').style.display = 'none';
       document.getElementById('storia').style.display = 'none';
       document.getElementById('contatti').style.display = 'none';
+      document.getElementById('maglie').style.display = 'none'; // Aggiunto per nascondere la sezione Maglie
 
       document.getElementById(id).style.display = 'block';
     }
