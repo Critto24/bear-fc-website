@@ -14,33 +14,33 @@
       padding: 0;
       text-align: center;
       min-height: 100vh;
-      display: none; /* AGGIUNTO: Nasconde il body di default */
+      display: none;
       flex-direction: column;
       overflow-x: hidden;
     }
     /* Il resto dello stile del body viene applicato solo dopo l'accesso */
 
     header {
-      background: linear-gradient(to right, #0a0, #0c0); /* Gradiente per l'header */
+      background: linear-gradient(to right, #0a0, #0c0);
       padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Ombra per l'header */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       position: relative;
       z-index: 10;
     }
     header img {
       max-width: 150px;
-      border-radius: 50%; /* Rende il logo rotondo */
-      border: 3px solid #fff; /* Bordo bianco intorno al logo */
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Effetto luminoso sul logo */
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
       transition: transform 0.3s ease-in-out;
     }
     header img:hover {
-      transform: scale(1.05) rotate(5deg); /* Effetto al passaggio del mouse */
+      transform: scale(1.05) rotate(5deg);
     }
     header h1 {
       color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-      letter-spacing: 2px; /* Spaziatura tra le lettere */
+      letter-spacing: 2px;
       margin-bottom: 5px;
     }
     header p {
@@ -53,7 +53,7 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      border-bottom: 2px solid #0f0; /* Bordo inferiore per la nav */
+      border-bottom: 2px solid #0f0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     nav a {
@@ -61,43 +61,43 @@
       margin: 0 15px;
       text-decoration: none;
       cursor: pointer;
-      padding: 8px 15px; /* Aumentato il padding */
-      border-radius: 20px; /* Bordi più arrotondati (pill-shaped) */
-      transition: background 0.3s ease, transform 0.2s ease; /* Transizione per hover e trasformazione */
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: background 0.3s ease, transform 0.2s ease;
       font-weight: bold;
-      text-transform: uppercase; /* Testo in maiuscolo */
+      text-transform: uppercase;
     }
     nav a:hover {
       background: #0f0;
-      transform: translateY(-3px); /* Leggero sollevamento all'hover */
-      color: #111; /* Testo più scuro all'hover */
+      transform: translateY(-3px);
+      color: #111;
     }
     main {
       flex: 1;
       padding: 20px;
-      background: url('https://images.unsplash.com/photo-1510192022794-63b7c2b01c38?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fA%3D%3D') no-repeat center center fixed; /* Immagine di sfondo */
+      background: url('https://images.unsplash.com/photo-1510192022794-63b7c2b01c38?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fA%3D%3D') no-repeat center center fixed;
       background-size: cover;
       position: relative;
     }
-    main::before { /* Overlay scuro per migliorare la leggibilità del testo */
+    main::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.6); /* Scurisce l'immagine di sfondo */
+      background: rgba(0, 0, 0, 0.6);
       z-index: 1;
     }
     section {
-      position: relative; /* Per posizionare il contenuto sopra l'overlay */
+      position: relative;
       z-index: 2;
-      background: rgba(34, 34, 34, 0.9); /* Sfondo semi-trasparente per le sezioni */
+      background: rgba(34, 34, 34, 0.9);
       padding: 25px;
       border-radius: 15px;
       margin-bottom: 30px;
-      box-shadow: 0 0 25px rgba(0, 255, 0, 0.3); /* Ombra verde luminosa */
-      animation: sectionFadeIn 1s ease-out; /* Animazione all'apparizione della sezione */
+      box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+      animation: sectionFadeIn 1s ease-out;
     }
     @keyframes sectionFadeIn {
         from { opacity: 0; transform: translateY(30px); }
@@ -120,33 +120,48 @@
     .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info {
       background: #222;
       padding: 15px;
-      border-radius: 10px; /* Bordi leggermente più arrotondati */
+      border-radius: 10px;
       width: 200px;
       margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Ombra più pronunciata */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover {
-      transform: translateY(-5px); /* Sollevamento all'hover */
-      box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5); /* Ombra luminosa all'hover */
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5);
+    }
+
+    /* Stile per Giocatori e Formazione (lista più strutturata) */
+    .giocatori ul, .formazione ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .giocatori li, .formazione li {
+      margin-bottom: 8px;
+      font-size: 1.05em;
+      line-height: 1.4em;
+    }
+    .giocatori li strong, .formazione li strong {
+      color: #0f0;
     }
 
     /* Stili per le nuove sezioni */
     .notizia-item {
       width: 300px;
-      border-left: 5px solid #0f0; /* Bordo sinistro verde */
+      border-left: 5px solid #0f0;
     }
     .notizia-item h3 {
       color: #0f0;
       margin-top: 0;
-      border-bottom: 1px dashed #444; /* Linea tratteggiata sotto il titolo */
+      border-bottom: 1px dashed #444;
       padding-bottom: 5px;
     }
     .notizia-item p {
       font-size: 0.9em;
     }
     .notizia-item small {
-      display: block; /* Va a capo */
+      display: block;
       text-align: right;
       color: #bbb;
       margin-top: 10px;
@@ -155,7 +170,7 @@
     .storia-sezione {
       width: 500px;
       text-align: justify;
-      border-right: 5px solid #0f0; /* Bordo destro verde */
+      border-right: 5px solid #0f0;
     }
     .storia-sezione h3 {
         color: #0f0;
@@ -165,7 +180,7 @@
 
     .contatti-info {
         width: 300px;
-        border: 1px solid #0f0; /* Bordo verde sottile */
+        border: 1px solid #0f0;
     }
     .contatti-info p {
         margin-bottom: 10px;
@@ -181,12 +196,12 @@
     }
 
     footer {
-      background: linear-gradient(to right, #0a0, #0c0); /* Gradiente per il footer */
-      padding: 15px; /* Aumentato il padding */
+      background: linear-gradient(to right, #0a0, #0c0);
+      padding: 15px;
       font-size: 0.9em;
       margin-top: auto;
       color: #fff;
-      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4); /* Ombra superiore per il footer */
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
     }
 
     /* Decorazioni HOME */
@@ -200,6 +215,22 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    /* NUOVO STILE PER L'IMMAGINE NELLA SEZIONE HOME */
+    .home-image {
+      max-width: 80%;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .home-image:hover {
+      transform: scale(1.02);
+    }
+    /* FINE NUOVO STILE */
 
     #home h2 {
       text-shadow: 2px 2px 5px #0a0;
@@ -241,7 +272,7 @@
 
     #home button:hover {
       background: #0f0;
-      transform: scale(1.05); /* Scala leggermente il pulsante all'hover */
+      transform: scale(1.05);
     }
 
     /* Media Queries per la responsività */
@@ -255,7 +286,7 @@
       }
       nav a {
         margin: 5px 10px;
-        padding: 6px 12px; /* Aggiustato il padding per schermi piccoli */
+        padding: 6px 12px;
       }
     }
 
@@ -280,6 +311,7 @@
     <section id="home">
       <h2>Benvenuti nel sito ufficiale del Bear F.C.</h2>
       <p>Segui le novità e la storia della nostra squadra! Rimani aggiornato su partite, risultati e curiosità!</p>
+      <img src="maglia-calcio.jpg" alt="Maglia da calcio Bear F.C." class="home-image">
       <button onclick="mostraSezione('squadra')">Scopri la Squadra</button>
     </section>
 
@@ -289,29 +321,23 @@
         <div class="giocatori">
           <h3>Giocatori</h3>
           <ul>
-            <li>Marchetti Cristian</li>
-            <li>Davide Ferrera</li>
-            <li>Francesco Schembari</li>
-            <li>Giulio Campo</li>
-            <li>Stefano Puglisi</li>
-            <li>Andres Marchetti</li>
-            <li>Emanuele Licco</li>
-            <li>Vincenzo Spadola</li>
-            <li>Lorenzo Marchetti</li>
-            <li>Nicolò Gurrieri</li>
-            <li>Giovanni Cascone</li>
-            <li>Ciccio</li>
+            <li><strong>Portiere:</strong> Marchetti Cristian</li>
+            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo</li>
+            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
+            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
+            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
           </ul>
         </div>
         <div class="formazione">
           <h3>Formazione</h3>
-          <p>
-            **Portiere:** Marchetti Cristian<br>
-            **Difensori:** Davide Ferrera, Francesco Schembari, Giulio Campo<br>
-            **Centrocampisti:** Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola<br>
-            **Attaccanti:** Lorenzo Marchetti, Nicolò Gurrieri<br>
-            **Riserve:** Giovanni Cascone, Ciccio<br>
-          </p>
+          <ul>
+            <li><strong>Portiere:</strong> Marchetti Cristian</li>
+            <li><strong>Difensori:** Davide Ferrera, Francesco Schembari, Giulio Campo</li>
+            <li><strong>Centrocampisti:</strong> Stefano Puglisi, Andres Marchetti, Emanuele Licco, Vincenzo Spadola</li>
+            <li><strong>Attaccanti:</strong> Lorenzo Marchetti, Nicolò Gurrieri</li>
+            <li><strong>Riserve:</strong> Giovanni Cascone, Ciccio</li>
+            <li><strong>Allenatore:</strong> Coach Rossi</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -385,7 +411,6 @@
     let accessoConsentito = false;
 
     function verificaAccesso() {
-      // Controlla se l'accesso è già stato concesso in questa sessione del browser
       if (sessionStorage.getItem('accessoBearFC') === 'concesso') {
         accessoConsentito = true;
         return true;
@@ -394,28 +419,18 @@
       const passwordInserita = prompt("Inserisci la password per accedere al sito Bear F.C.:");
       if (passwordInserita === passwordCorretta) {
         accessoConsentito = true;
-        sessionStorage.setItem('accessoBearFC', 'concesso'); // Memorizza l'accesso per la sessione
-        document.body.style.display = 'flex'; // Mostra il body solo dopo l'accesso
+        sessionStorage.setItem('accessoBearFC', 'concesso');
+        document.body.style.display = 'flex';
         return true;
-      } else if (passwordInserita !== null) { // Se l'utente non ha cliccato "Annulla"
+      } else if (passwordInserita !== null) {
         alert("Password errata. Accesso negato.");
-        // Non reindirizzare subito, la pagina resterà bianca finché non viene chiusa
         return false;
-      } else { // Se l'utente ha cliccato "Annulla"
-        // Non reindirizzare subito, la pagina resterà bianca finché non viene chiusa
+      } else {
         return false;
       }
     }
 
-    // --- FINE CODICE PER LA PASSWORD ---
-
-
     function mostraSezione(id) {
-      // Questa funzione ora viene chiamata solo DOPO che l'accesso è stato concesso
-      // o dal click sui link interni dopo il primo accesso.
-      // Non è più necessario il controllo 'if (!accessoConsentito)' qui
-      // perché l'onload gestisce già l'accesso iniziale.
-
       document.getElementById('home').style.display = 'none';
       document.getElementById('squadra').style.display = 'none';
       document.getElementById('notizie').style.display = 'none';
@@ -425,18 +440,12 @@
       document.getElementById(id).style.display = 'block';
     }
 
-    // Al caricamento della pagina, esegui la verifica dell'accesso
     window.onload = function() {
         if (verificaAccesso()) {
-            // Se la verifica ha successo o l'accesso era già memorizzato, mostra la home
-            // Il body.style.display = 'flex' è già gestito all'interno di verificaAccesso
             mostraSezione('home');
-        } else {
-            // Se la verifica fallisce (password errata o annullata),
-            // il body rimane nascosto e la pagina è bianca.
-            // L'utente può solo chiudere la scheda.
         }
     };
   </script>
 </body>
+</html>
 </html>
