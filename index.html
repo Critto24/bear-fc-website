@@ -112,10 +112,10 @@
     .contenuto {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: center; /* Centra gli elementi lungo l'asse principale (orizzontale) */
       gap: 50px;
-      text-align: left;
       flex-wrap: wrap;
+      align-items: center; /* Centra gli elementi lungo l'asse trasversale (verticale, se c'è spazio), cruciale per l'allineamento dei blocchi */
     }
     .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item {
       background: #222;
@@ -166,6 +166,41 @@
       color: #bbb;
       margin-top: 10px;
     }
+    /* Stili specifici per il pagellino */
+    .pagellino-container {
+        text-align: left; /* Allinea il testo delle votazioni a sinistra */
+        line-height: 1.6em; /* Spaziatura tra le righe */
+    }
+    .pagellino-container strong {
+        color: #0f0;
+    }
+    .pagellino-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+    .pagellino-container ul li {
+        margin-bottom: 5px;
+    }
+    .pagellino-container .medaglia {
+        font-size: 1.2em; /* Rende le medaglie leggermente più grandi */
+        color: #FFD700; /* Oro */
+    }
+    .pagellino-container .medaglia.silver {
+        color: #C0C0C0; /* Argento */
+    }
+    .pagellino-container .medaglia.bronze {
+        color: #CD7F32; /* Bronzo */
+    }
+    .pagellino-container .mvp {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #FFD700;
+        margin-top: 20px;
+        border-top: 1px dashed #444;
+        padding-top: 10px;
+    }
+
 
     .storia-sezione {
       width: 500px;
@@ -339,7 +374,8 @@
             <li><strong>Portiere:</strong> Ciccio</li>
             <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
             <li><strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
-            <li><strong>Attaccanti:</strong> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li> </ul>
+            <li><strong>Attaccanti:</b> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -361,24 +397,31 @@
     <section id="notizie">
       <h2>Ultime Notizie</h2>
       <div class="contenuto">
-        <div class="notizia-item">
-          <h3>Vittoria in trasferta per il Bear F.C.!</h3>
-          <p>Grande prestazione della squadra che si impone per 3-1 contro gli avversari. Un gol di Lorenzo Marchetti e una doppietta di Nicolò Gurrieri sigillano la vittoria.</p>
-          <small>Data: 15 Giugno 2025</small>
+        <div class="notizia-item" style="width: 400px;"> <h3>Pagellino Partita Sabato 14 Giugno</h3>
+          <div class="pagellino-container">
+            <p>Un'altra grande giornata di calcio per il Bear F.C.! La squadra ha dimostrato grinta e determinazione in campo, portando a casa un risultato importante. Ecco i voti della partita:</p>
+            <ul>
+              <li><strong>Vincenzo:</strong> 7</li>
+              <li><strong>Stefano:</strong> 8-</li>
+              <li><strong>Cristian:</strong> 9-</li>
+              <li><strong>Ciccio (portierone):</strong> 9-</li>
+              <li><strong>Licco:</strong> 8</li>
+              <li><strong>Andres:</strong> 8 e mezzo</li>
+              <li><strong>Nicolò:</strong> 7</li>
+            </ul>
+            <p>Ecco i nostri podi della giornata:</p>
+            <ul>
+              <li><span class="medaglia">🏅</span> Ciccio</li>
+              <li><span class="medaglia">🏅</span> Cristian</li>
+              <li><span class="medaglia silver">🥈</span> Andres</li>
+              <li><span class="medaglia bronze">🥉</span> Licco</li>
+            </ul>
+            <p class="mvp">MVP 🏅 CRISTIAN</p>
+          </div>
+          <small>Data: 14 Giugno 2025</small>
         </div>
-        <div class="notizia-item">
-          <h3>Allenamento intensivo in vista del prossimo match</h3>
-          <p>La squadra si sta preparando al meglio per la prossima partita casalinga. Coach Rossi è soddisfatto dell'impegno dei ragazzi.</p>
-          <small>Data: 12 Giugno 2025</small>
         </div>
-        <div class="notizia-item">
-          <h3>Nuova maglia per la stagione 2025/2026!</h3>
-          <p>Svelata la nuova divisa ufficiale del Bear F.C. per la prossima stagione. Design innovativo e colori vibranti.</p>
-          <small>Data: 10 Giugno 2025</small>
-        </div>
-      </div>
     </section>
-
     <section id="storia">
       <h2>La Nostra Storia</h2>
       <div class="contenuto">
