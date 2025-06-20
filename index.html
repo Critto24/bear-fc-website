@@ -4,21 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bear F.C.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    /* Nascondi il body di default */
+    /* GENERAL BODY STYLES */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Lato', sans-serif;
       background: #111;
       color: #eee;
       margin: 0;
       padding: 0;
       text-align: center;
-      min-height: 100vh;
-      display: none;
+      display: flex; /* Mantiene il body come flex container */
       flex-direction: column;
-      overflow-x: hidden;
+      overflow-x: hidden; /* Previene scroll orizzontale */
+      min-height: 100vh; /* Assicura che il body occupi l'altezza completa */
+      position: relative; /* Per posizionare il preloader/intro */
     }
-    /* Il resto dello stile del body viene applicato solo dopo l'accesso */
+
+    /* INTRO SCREEN (where password is asked) */
+    #intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #111; /* Sfondo nero per l'intro */
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.5s ease-out; /* Transizione per il fade-out dell'intro */
+    }
+
+    /* Main Content Container */
+    #main-content {
+      opacity: 0;
+      transform: translateY(-50px); /* Inizia leggermente più in alto per l'effetto discesa */
+      transition: opacity 1s ease-out, transform 1s ease-out; /* Transizione per fade-in e "discesa" */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+      pointer-events: none; /* Disabilita interazioni finché non è visibile */
+    }
 
     header {
       background: linear-gradient(to right, #0a0, #0c0);
@@ -38,6 +68,7 @@
       transform: scale(1.05) rotate(5deg);
     }
     header h1 {
+      font-family: 'Montserrat', sans-serif;
       color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
       letter-spacing: 2px;
@@ -66,6 +97,8 @@
       transition: background 0.3s ease, transform 0.2s ease;
       font-weight: bold;
       text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
     }
     nav a:hover {
       background: #0f0;
@@ -99,6 +132,12 @@
       box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
       animation: sectionFadeIn 1s ease-out;
     }
+    section h2 {
+        font-family: 'Montserrat', sans-serif;
+        text-shadow: 1px 1px 3px rgba(0,255,0,0.5);
+        margin-bottom: 25px;
+    }
+
     @keyframes sectionFadeIn {
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
@@ -112,95 +151,116 @@
     .contenuto {
       display: flex;
       flex-direction: row;
-      justify-content: center; /* Centra gli elementi lungo l'asse principale (orizzontale) */
+      justify-content: center;
       gap: 50px;
       flex-wrap: wrap;
-      align-items: center; /* Centra gli elementi lungo l'asse trasversale (verticale, se c'è spazio), cruciale per l'allineamento dei blocchi */
+      align-items: center;
     }
-    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-item {
+    /* Stili generali per le "card" */
+    .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
       background: #222;
-      padding: 15px;
-      border-radius: 10px;
-      width: 200px;
+      padding: 20px;
+      border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0,255,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      border: 1px solid #0f0;
     }
-    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 255, 0, 0.5);
+    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-list:hover, .statistiche-classifiche:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 255, 0, 0.6), 0 0 20px rgba(0,255,0,0.8);
+      border-color: #7f7;
     }
 
     /* Stile per Giocatori (lista più strutturata) */
+    .giocatori {
+        width: 300px;
+    }
+    .giocatori h3 {
+        font-family: 'Montserrat', sans-serif;
+        color: #0f0;
+        border-bottom: 1px dashed #444;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
     .giocatori ul {
       list-style: none;
       padding: 0;
       margin: 0;
+      text-align: left;
     }
     .giocatori li {
-      margin-bottom: 8px;
-      font-size: 1.05em;
-      line-height: 1.4em;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      line-height: 1.5em;
     }
     .giocatori li strong {
       color: #0f0;
     }
+    .giocatori li .icon {
+        margin-right: 8px;
+        color: #7f7;
+    }
 
-    /* Stili per le nuove sezioni */
+    /* Stili per le notizie e pagellino */
     .notizia-item {
-      width: 300px;
+      width: 400px; /* Larghezza predefinita per le notizie */
       border-left: 5px solid #0f0;
     }
+    /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
+    .notizia-item.pagellino {
+        width: 280px; /* Larghezza ridotta */
+        max-width: 90%; /* Per responsività su schermi piccoli */
+        /* --- MODIFICHE PER RIDURRE L'ALTEZZA DEL PAGELLINO --- */
+        padding: 15px; /* Riduci padding generale per un aspetto più compatto */
+    }
     .notizia-item h3 {
+      font-family: 'Montserrat', sans-serif;
       color: #0f0;
       margin-top: 0;
-      border-bottom: 1px dashed #444;
-      padding-bottom: 5px;
+      padding-bottom: 5px; /* Ulteriore riduzione padding-bottom */
+      margin-bottom: 8px; /* Ulteriore riduzione margin-bottom */
     }
     .notizia-item p {
-      font-size: 0.9em;
+      font-size: 0.95em; /* Leggermente più piccolo per ridurre l'altezza */
+      line-height: 1.3em; /* Ridotto il line-height per stringere il testo */
+      text-align: justify;
+      margin-bottom: 8px; /* Ridotto margine inferiore */
     }
     .notizia-item small {
       display: block;
       text-align: right;
       color: #bbb;
-      margin-top: 10px;
+      margin-top: 8px; /* Ridotto margine superiore */
+      font-size: 0.75em; /* Ulteriore riduzione dimensione carattere */
     }
-    /* Stili specifici per il pagellino */
     .pagellino-container {
-        text-align: left; /* Allinea il testo delle votazioni a sinistra */
-        line-height: 1.6em; /* Spaziatura tra le righe */
-    }
-    .pagellino-container strong {
-        color: #0f0;
+        text-align: left;
+        line-height: 1.4em; /* Ulteriore riduzione line-height generale del pagellino */
+        padding-top: 5px;
     }
     .pagellino-container ul {
         list-style: none;
         padding: 0;
-        margin: 10px 0;
+        margin: 6px 0; /* Ulteriore riduzione margine sopra e sotto le liste */
     }
     .pagellino-container ul li {
-        margin-bottom: 5px;
+        margin-bottom: 0px; /* Quasi nessun margine per le voci di lista */
+        font-size: 0.9em; /* Riduci dimensione testo delle voci */
     }
     .pagellino-container .medaglia {
-        font-size: 1.2em; /* Rende le medaglie leggermente più grandi */
-        color: #FFD700; /* Oro */
-    }
-    .pagellino-container .medaglia.silver {
-        color: #C0C0C0; /* Argento */
-    }
-    .pagellino-container .medaglia.bronze {
-        color: #CD7F32; /* Bronzo */
+        font-size: 1.1em; /* Ulteriore riduzione dimensione medaglia */
+        margin-right: 3px; /* Ulteriore riduzione margine destro */
     }
     .pagellino-container .mvp {
-        font-size: 1.5em;
+        font-size: 1.4em; /* Ulteriore riduzione dimensione MVP */
         font-weight: bold;
         color: #FFD700;
-        margin-top: 20px;
-        border-top: 1px dashed #444;
-        padding-top: 10px;
+        margin-top: 12px; /* Ulteriore riduzione margine superiore */
+        border-top: 1px solid #0f0;
+        padding-top: 8px; /* Ulteriore riduzione padding superiore */
+        text-align: center;
     }
-
 
     .storia-sezione {
       width: 500px;
@@ -208,17 +268,32 @@
       border-right: 5px solid #0f0;
     }
     .storia-sezione h3 {
+        font-family: 'Montserrat', sans-serif;
         color: #0f0;
         text-align: center;
         margin-top: 0;
+        border-bottom: 1px dashed #444;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    .storia-sezione p {
+        line-height: 1.6em;
     }
 
     .contatti-info {
         width: 300px;
         border: 1px solid #0f0;
     }
+    .contatti-info h3 {
+        font-family: 'Montserrat', sans-serif;
+        color: #0f0;
+        border-bottom: 1px dashed #444;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
     .contatti-info p {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        font-size: 1.05em;
     }
     .contatti-info a {
         color: #0f0;
@@ -232,71 +307,95 @@
 
     /* Stile per la nuova sezione Maglie */
     #maglie .maglia-item {
-        width: 300px; /* O quanto preferisci */
+        width: 320px;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* Per centrare il contenuto verticalmente */
-        min-height: 250px; /* Per dare spazio anche senza immagine */
+        justify-content: center;
+        min-height: 280px;
+        border: 2px solid #0f0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0,255,0,0.3);
     }
     #maglie .maglia-item img {
-        max-width: 100%;
+        max-width: 90%; /* Assicurati che l'immagine si adatti al contenitore */
         height: auto;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-        margin-bottom: 10px;
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        margin-bottom: 15px;
+    }
+    #maglie .maglia-item .maglia-logo {
+        position: absolute; /* Rendi la posizione relativa all'elemento .maglia-item genitore */
+        top: 20px; /* Regola per posizionare il logo sulla maglia */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px; /* Dimensione del logo sulla maglia */
+        height: 80px;
+        background-image: url('bear-fc-logo.jpg'); /* Nome corretto del file logo */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 5;
     }
     #maglie .maglia-item p {
-        font-size: 1.1em;
+        font-size: 1.2em;
         color: #0f0;
         font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
     }
-    /* Nuovo stile per il testo "In arrivo" */
     #maglie .maglia-item .in-arrivo {
-        font-size: 1.8em; /* Rendi il testo più grande */
+        font-size: 2.2em;
         font-weight: bold;
-        color: #ddd; /* Colore leggermente diverso per farlo risaltare */
-        text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+        color: #ddd;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
     }
 
     /* Stili per la nuova sezione Statistiche */
-    #statistiche .statistiche-container { /* Nuovo contenitore flex per il layout interno */
+    #statistiche .statistiche-container {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center; /* Centra orizzontalmente tutti i sub-item */
-        gap: 30px; /* Spazio tra i sub-item */
-        align-items: flex-start; /* Allinea in alto gli elementi se di altezza diversa */
+        justify-content: center;
+        gap: 40px;
+        align-items: flex-start;
     }
 
     #statistiche .statistiche-list,
     #statistiche .statistiche-classifiche {
         background: #222;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border-left: 5px solid #0f0;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0,255,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        border: 1px solid #0f0;
         text-align: left;
     }
+    #statistiche .statistiche-list:hover,
+    #statistiche .statistiche-classifiche:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 255, 0, 0.6), 0 0 20px rgba(0,255,0,0.8);
+        border-color: #7f7;
+    }
+
     #statistiche .statistiche-list {
-        flex: 1; /* Prende lo spazio disponibile */
-        min-width: 280px; /* Larghezza minima */
-        max-width: 400px; /* Larghezza massima */
+        flex: 1;
+        min-width: 300px;
+        max-width: 450px;
     }
     #statistiche .statistiche-classifiche {
-        flex: 1; /* Prende lo spazio disponibile */
-        min-width: 280px; /* Larghezza minima */
-        max-width: 350px; /* Larghezza massima */
+        flex: 1;
+        min-width: 250px;
+        max-width: 350px;
     }
 
     #statistiche .statistiche-list h3,
     #statistiche .statistiche-classifiche h3 {
+        font-family: 'Montserrat', sans-serif;
         color: #0f0;
         margin-top: 0;
         border-bottom: 1px dashed #444;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
     }
     #statistiche .statistiche-list ul {
         list-style: none;
@@ -312,23 +411,25 @@
         color: #0f0;
     }
     #statistiche .statistiche-classifiche h4 {
+        font-family: 'Montserrat', sans-serif;
         color: #0f0;
-        margin-top: 20px;
+        margin-top: 25px;
         border-top: 1px dashed #444;
-        padding-top: 10px;
+        padding-top: 15px;
     }
     #statistiche .statistiche-classifiche ol {
-        padding-left: 20px;
+        padding-left: 25px;
         margin-top: 10px;
     }
     #statistiche .statistiche-classifiche ol li {
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         font-weight: bold;
+        font-size: 1.1em;
     }
     #statistiche .statistiche-classifiche ol li span {
         color: #0f0;
+        font-weight: normal;
     }
-
 
     footer {
       background: linear-gradient(to right, #0a0, #0c0);
@@ -342,16 +443,17 @@
     /* Decorazioni HOME */
     #home {
       border: 2px solid #0a0;
-      border-radius: 12px;
-      padding: 20px;
-      background: linear-gradient(145deg, #111 0%, #131 100%);
-      box-shadow: 0 0 20px #0a0;
+      border-radius: 15px;
+      padding: 30px;
+      background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
+      box-shadow: 0 0 25px #0a0;
       animation: fadeIn 2s ease-in-out;
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto;
     }
 
     #home h2 {
+      font-family: 'Montserrat', sans-serif;
       text-shadow: 2px 2px 5px #0a0;
       animation: pulse 3s infinite alternate;
       position: relative;
@@ -373,25 +475,30 @@
     }
 
     #home p {
-      font-size: 1.1em;
-      line-height: 1.5em;
+      font-size: 1.15em;
+      line-height: 1.6em;
+      margin-bottom: 25px;
     }
 
     #home button {
-      background: #0a0;
+      background: linear-gradient(to right, #0a0, #0f0);
       color: #111;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 1em;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 1.1em;
       cursor: pointer;
       margin-top: 15px;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     #home button:hover {
-      background: #0f0;
-      transform: scale(1.05);
+      background: linear-gradient(to right, #0f0, #0a0);
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
     }
 
     /* Media Queries per la responsività */
@@ -400,232 +507,269 @@
         flex-direction: column;
         align-items: center;
       }
-      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-item {
+      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
         width: 90%;
-      }
-      /* Per le statistiche, su mobile, vogliamo che i due blocchi vadano uno sotto l'altro e si allineino */
-      #statistiche .statistiche-container {
-          flex-direction: column;
-          align-items: center; /* Centra i blocchi stessi */
-          gap: 20px; /* Ridotto per mobile */
-      }
-      #statistiche .statistiche-list,
-      #statistiche .statistiche-classifiche {
-          width: 90%; /* Prendono quasi tutta la larghezza disponibile */
-          max-width: none; /* Rimuove il max-width per consentire maggiore adattamento */
+        max-width: none;
       }
       nav a {
         margin: 5px 10px;
         padding: 6px 12px;
+        font-size: 0.9em;
+      }
+      #statistiche .statistiche-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
       }
     }
 
   </style>
 </head>
 <body>
-  <header>
-    <img src="bear-fc-logo.jpg" alt="Bear F.C. Logo" />
-    <h1>Bear F.C.</h1>
-    <p>Fondato nel 2024</p>
-  </header>
 
-  <nav>
-    <a href="#home" onclick="mostraSezione('home'); return false;">Home</a>
-    <a href="#squadra" onclick="mostraSezione('squadra'); return false;">Squadra</a>
-    <a href="#maglie" onclick="mostraSezione('maglie'); return false;">Maglie</a>
-    <a href="#statistiche" onclick="mostraSezione('statistiche'); return false;">Statistiche</a>
-    <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
-    <a href="#storia" onclick="mostraSezione('storia'); return false;">Storia</a>
-    <a href="#contatti" onclick="mostraSezione('contatti'); return false;">Contatti</a>
-  </nav>
+  <div id="intro-screen">
+    </div>
 
-  <main>
-    <section id="home">
-      <h2>Benvenuti nel sito ufficiale del Bear F.C.</h2>
-      <p>Segui le novità e la storia della nostra squadra! Rimani aggiornato su partite, risultati e curiosità!</p>
-      <button onclick="mostraSezione('squadra')">Scopri la Squadra</button>
-    </section>
+  <div id="main-content">
+    <header>
+      <img src="bear-fc-logo.jpg" alt="Bear F.C. Logo" />
+      <h1>Bear F.C.</h1>
+      <p>Fondato nel 2024</p>
+    </header>
 
-    <section id="squadra">
-      <h2>La Squadra</h2>
-      <div class="contenuto">
-        <div class="giocatori">
-          <h3>Giocatori</h3>
-          <ul>
-            <li><strong>Portiere:</strong> Ciccio</li>
-            <li><strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
-            <li><strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
-            <li><strong>Attaccanti:</strong> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <nav>
+      <a href="#home" onclick="mostraSezione('home'); return false;">Home</a>
+      <a href="#squadra" onclick="mostraSezione('squadra'); return false;">Squadra</a>
+      <a href="#maglie" onclick="mostraSezione('maglie'); return false;">Maglie</a>
+      <a href="#statistiche" onclick="mostraSezione('statistiche'); return false;">Statistiche</a>
+      <a href="#notizie" onclick="mostraSezione('notizie'); return false;">Notizie</a>
+      <a href="#storia" onclick="mostraSezione('storia'); return false;">Storia</a>
+      <a href="#contatti" onclick="mostraSezione('contatti'); return false;">Contatti</a>
+    </nav>
 
-    <section id="maglie">
-        <h2>Le Nostre Maglie</h2>
+    <main>
+      <section id="home">
+        <h2>Benvenuti nel sito ufficiale del Bear F.C.</h2>
+        <p>Segui le novità e la storia della nostra squadra! Rimani aggiornato su partite, risultati e curiosità!</p>
+        <button onclick="mostraSezione('squadra')">Scopri la Squadra</button>
+      </section>
+
+      <section id="squadra">
+        <h2>La Squadra</h2>
         <div class="contenuto">
-            <div class="maglia-item">
-                <img src="maglia-calcio.jpg" alt="Maglia Bear F.C. 2024/2025">
-                <p>Stagione 2024/2025</p>
-            </div>
-            <div class="maglia-item">
-                <p class="in-arrivo">IN ARRIVO</p>
-                <p>Stagione 2025/2026</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="statistiche">
-        <h2>Statistiche Giocatori</h2>
-        <div class="contenuto statistiche-container"> <div class="statistiche-list">
-                <h3>Gol e Assist Totali</h3>
-                <ul>
-                    <li><strong>Cristian:</strong> 132 Gol, 55 Assist</li>
-                    <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
-                    <li><strong>Vinci:</strong> 37 Gol, 45 Assist</li>
-                    <li><strong>Davide:</strong> 20 Gol, 47 Assist</li>
-                    <li><strong>Giovanni:</strong> 5 Gol, 4 Assist</li>
-                    <li><strong>Ciccio:</strong> 2 Gol, 2 Assist</li>
-                    <li><strong>Nicolò:</strong> 8 Gol, 20 Assist</li>
-                    <li><strong>Stefano:</strong> 6 Gol, 5 Assist</li>
-                    <li><strong>Giulio:</strong> 44 Gol, 29 Assist</li>
-                    <li><strong>Luca:</strong> 7 Gol, 5 Assist</li>
-                    <li><strong>Andres:</strong> 61 Gol, 59 Assist</li>
-                    <li><strong>Lorenzo:</strong> 13 Gol, 8 Assist</li>
-                    <li><strong>Ciccio.:</strong> 1 Assist</li>
-                </ul>
-            </div>
-
-            <div class="statistiche-classifiche">
-                <h3>Classifiche</h3>
-                <h4>Top 3 Marcatori</h4>
-                <ol>
-                    <li>Cristian: <span>132 Gol</span></li>
-                    <li>Licco: <span>92 Gol</span></li>
-                    <li>Andres: <span>61 Gol</span></li>
-                </ol>
-                <h4>Top 3 Assist-man</h4>
-                <ol>
-                    <li>Andres: <span>59 Assist</span></li>
-                    <li>Licco: <span>58 Assist</span></li>
-                    <li>Cristian: <span>55 Assist</span></li>
-                </ol>
-            </div>
-        </div>
-    </section>
-    <section id="notizie">
-      <h2>Ultime Notizie</h2>
-      <div class="contenuto">
-        <div class="notizia-item" style="width: 400px;">
-          <h3>Pagellino Partita Sabato 14 Giugno</h3>
-          <div class="pagellino-container">
-            <p>Un'altra grande giornata di calcio per il Bear F.C.! La squadra ha dimostrato grinta e determinazione in campo, portando a casa un risultato importante. Ecco i voti della partita:</p>
+          <div class="giocatori">
+            <h3>Giocatori</h3>
             <ul>
-              <li><strong>Vincenzo:</strong> 7</li>
-              <li><strong>Stefano:</strong> 8-</li>
-              <li><strong>Cristian:</strong> 9-</li>
-              <li><strong>Ciccio (portierone):</strong> 9-</li>
-              <li><strong>Licco:</strong> 8</li>
-              <li><strong>Andres:</strong> 8 e mezzo</li>
-              <li><strong>Nicolò:</strong> 7</li>
+              <li><span class="icon">🧤</span> <strong>Portiere:</strong> Ciccio</li>
+              <li><span class="icon">🛡️</span> <strong>Difensori:</strong> Davide Ferrera, Francesco Schembari, Giulio Campo, Stefano Puglisi</li>
+              <li><span class="icon">⚽</span> <strong>Centrocampisti:</strong> Nicolò Gurrieri, Giovanni Cascone, Vincenzo Spadola, Lorenzo Marchetti</li>
+              <li><span class="icon">🥅</span> <strong>Attaccanti:</b> Cristian Marchetti, Emanuele Licco, Andres Marchetti</li>
             </ul>
-            <p>Ecco i nostri podi della giornata:</p>
-            <ul>
-              <li><span class="medaglia">🏅</span> Ciccio</li>
-              <li><span class="medaglia">🏅</span> Cristian</li>
-              <li><span class="medaglia silver">🥈</span> Andres</li>
-              <li><span class="medaglia bronze">🥉</span> Licco</li>
-            </ul>
-            <p class="mvp">MVP 🏅 CRISTIAN</p>
           </div>
-          <small>Data: 14 Giugno 2025</small>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="storia">
-      <h2>La Nostra Storia</h2>
-      <div class="contenuto">
-        <div class="storia-sezione">
-          <h3>Fondazione</h3>
-          <p>Il Bear F.C. è stato fondato nel **2024** da un gruppo di amici appassionati di calcio, con l'obiettivo di creare una squadra che unisse divertimento, spirito di squadra e ambizione sportiva. Fin dai primi giorni, l'entusiasmo e la dedizione sono stati i pilastri su cui è cresciuto il club.</p>
-        </div>
-        <div class="storia-sezione">
-          <h3>I Primi Anni</h3>
-          <p>Dopo un inizio promettente nei campionati locali, il Bear F.C. ha rapidamente dimostrato il suo valore, ottenendo importanti vittorie e conquistando il rispetto degli avversari. L'atmosfera all'interno della squadra è sempre stata di grande unità, fondamentale per superare le sfide e celebrare i successi.</p>
-        </div>
-        <div class="storia-sezione">
-          <h3>Obiettivi Futuri</h3>
-          <p>Il nostro obiettivo è continuare a crescere, sia a livello sportivo che come comunità. Vogliamo raggiungere nuovi traguardi, coinvolgere sempre più tifosi e lasciare un segno nel panorama calcistico locale. La passione per il gioco e l'amore per la maglia sono i valori che ci guidano verso il futuro.</p>
-        </div>
-      </div>
-    </section>
+      <section id="maglie">
+          <h2>Le Nostre Maglie</h2>
+          <div class="contenuto">
+              <div class="maglia-item">
+                  <img src="maglia-calcio.jpg" alt="Maglia Bear F.C. 2024/2025">
+                  <div class="maglia-logo"></div>
+                  <p>Stagione 2024/2025</p>
+              </div>
+              <div class="maglia-item">
+                  <p class="in-arrivo">IN ARRIVO</p>
+                  <p>Stagione 2025/2026</p>
+              </div>
+          </div>
+      </section>
 
-    <section id="contatti">
-      <h2>Contatti</h2>
-      <div class="contenuto">
-        <div class="contatti-info">
-          <h3>Informazioni di Contatto</h3>
-          <p>Email: <a href="mailto:info@bearfc.com">info@bearfc.com</a></p>
-          <p>Telefono: +39 091 1234567</p>
-          <p>Indirizzo: Via dello Stadio, 10 - 90100 Palermo, Sicilia, Italia</p>
+      <section id="statistiche">
+          <h2>Statistiche Giocatori</h2>
+          <div class="contenuto statistiche-container">
+              <div class="statistiche-list">
+                  <h3>Gol e Assist Totali</h3>
+                  <ul>
+                      <li><strong>Cristian:</strong> 132 Gol, 55 Assist</li>
+                      <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
+                      <li><strong>Vinci:</strong> 37 Gol, 45 Assist</li>
+                      <li><strong>Davide:</strong> 20 Gol, 47 Assist</li>
+                      <li><strong>Giovanni:</strong> 5 Gol, 4 Assist</li>
+                      <li><strong>Ciccio:</strong> 2 Gol, 2 Assist</li>
+                      <li><strong>Nicolò:</strong> 8 Gol, 20 Assist</li>
+                      <li><strong>Stefano:</strong> 6 Gol, 5 Assist</li>
+                      <li><strong>Giulio:</strong> 44 Gol, 29 Assist</li>
+                      <li><strong>Luca:</strong> 7 Gol, 5 Assist</li>
+                      <li><strong>Andres:</strong> 61 Gol, 59 Assist</li>
+                      <li><strong>Lorenzo:</strong> 13 Gol, 8 Assist</li>
+                      <li><strong>Ciccio.:</strong> 1 Assist</li>
+                  </ul>
+              </div>
+
+              <div class="statistiche-classifiche">
+                  <h3>Classifiche</h3>
+                  <h4>Top 3 Marcatori</h4>
+                  <ol>
+                      <li>Cristian: <span>132 Gol</span></li>
+                      <li>Licco: <span>92 Gol</span></li>
+                      <li>Andres: <span>61 Gol</span></li>
+                  </ol>
+                  <h4>Top 3 Assist-man</h4>
+                  <ol>
+                      <li>Andres: <span>59 Assist</span></li>
+                      <li>Licco: <span>58 Assist</span></li>
+                      <li>Cristian: <span>55 Assist</span></li>
+                  </ol>
+              </div>
+          </div>
+      </section>
+
+      <section id="notizie">
+        <h2>Ultime Notizie</h2>
+        <div class="contenuto">
+            <div class="notizia-item" style="width: 400px;">
+                <h3>Ritorno inaspettato del Bomber</h3>
+                <p>Dopo due mesi di stop forzato a causa di un infortunio, il nostro centrocampista Giovanni Cascone ha annunciato il suo ritorno in campo per la partita di domani. Un rientro attesissimo che rafforza la squadra!</p>
+                <small>Data: 20 Giugno 2025</small>
+            </div>
+          <div class="notizia-item pagellino">
+            <h3>Pagellino Partita Sabato 14 Giugno</h3>
+            <div class="pagellino-container">
+              <p>Un'altra grande giornata di calcio per il Bear F.C.! La squadra ha dimostrato grinta e determinazione in campo, portando a casa un risultato importante. Ecco i voti della partita:</p>
+              <ul>
+                <li><strong>Vincenzo:</strong> 7</li>
+                <li><strong>Stefano:</strong> 8-</li>
+                <li><strong>Cristian:</strong> 9-</li>
+                <li><strong>Ciccio (portierone):</strong> 9-</li>
+                <li><strong>Licco:</strong> 8</li>
+                <li><strong>Andres:</strong> 8 e mezzo</li>
+                <li><strong>Nicolò:</strong> 7</li>
+              </ul>
+              <p>Ecco i nostri podi della giornata:</p>
+              <ul>
+                <li><span class="medaglia">🏅</span> Ciccio</li>
+                <li><span class="medaglia">🏅</span> Cristian</li>
+                <li><span class="medaglia silver">🥈</span> Andres</li>
+                <li><span class="medaglia bronze">🥉</span> Licco</li>
+              </ul>
+              <p class="mvp">MVP 🏅 CRISTIAN</p>
+            </div>
+            <small>Data: 14 Giugno 2025</small>
+          </div>
         </div>
-        <div class="contatti-info">
-            <h3>Social Media</h3>
-            <p><a href="#" target="_blank">Facebook</a></p>
-            <p><a href="#" target="_blank">Instagram</a></p>
-            <p><a href="#" target="_blank">Twitter</a></p>
+      </section>
+
+      <section id="storia">
+        <h2>La Nostra Storia</h2>
+        <div class="contenuto">
+          <div class="storia-sezione">
+            <h3>Fondazione</h3>
+            <p>Il Bear F.C. è stato fondato nel **2024** da un gruppo di amici appassionati di calcio, con l'obiettivo di creare una squadra che unisse divertimento, spirito di squadra e ambizione sportiva. Fin dai primi giorni, l'entusiasmo e la dedizione sono stati i pilastri su cui è cresciuto il club.</p>
+          </div>
+          <div class="storia-sezione">
+            <h3>I Primi Anni</h3>
+            <p>Dopo un inizio promettente nei campionati locali, il Bear F.C. ha rapidamente dimostrato il suo valore, ottenendo importanti vittorie e conquistando il rispetto degli avversari. L'atmosfera all'interno della squadra è sempre stata di grande unità, fondamentale per superare le sfide e celebrare i successi.</p>
+          </div>
+          <div class="storia-sezione">
+            <h3>Obiettivi Futuri</h3>
+            <p>Il nostro obiettivo è continuare a crescere, sia a livello sportivo che come comunità. Vogliamo raggiungere nuovi traguardi, coinvolgere sempre più tifosi e lasciare un segno nel panorama calcistico locale. La passione per il gioco e l'amore per la maglia sono i valori che ci guidano verso il futuro.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </main>
+      <section id="contatti">
+        <h2>Contatti</h2>
+        <div class="contenuto">
+          <div class="contatti-info">
+            <h3>Informazioni di Contatto</h3>
+            <p>Email: <a href="mailto:info@bearfc.com">info@bearfc.com</a></p>
+            <p>Telefono: +39 091 1234567</p>
+            <p>Indirizzo: Via dello Stadio, 10 - 90100 Palermo, Sicilia, Italia</p>
+          </div>
+          <div class="contatti-info">
+              <h3>Social Media</h3>
+              <p><a href="#" target="_blank">Facebook</a></p>
+              <p><a href="#" target="_blank">Instagram</a></p>
+              <p><a href="#" target="_blank">Twitter</a></p>
+          </div>
+        </div>
+      </section>
 
-  <footer>
-    &copy; 2025 Bear F.C. - Tutti i diritti riservati
-  </footer>
+    </main>
 
-  <script>
-    // --- INIZIO CODICE PER LA PASSWORD ---
+    <footer>
+      &copy; 2025 Bear F.C. - Tutti i diritti riservati
+    </footer>
+  </div> <script>
     const passwordCorretta = "amicibearfc"; // <<< CAMBIA QUI LA TUA PASSWORD!
-    let accessoConsentito = false;
 
+    // Funzione per rivelare il contenuto con un semplice fade-in e discesa
+    function revealContentSimple() {
+        const introScreen = document.getElementById('intro-screen');
+        const mainContent = document.getElementById('main-content');
+
+        // Nasconde l'intro screen con un fade-out
+        introScreen.style.opacity = '0';
+        introScreen.addEventListener('transitionend', () => {
+            introScreen.style.display = 'none'; // Rimuove l'intro screen
+            
+            // Rende visibile il contenuto principale e lo fa scendere
+            mainContent.style.opacity = '1';
+            mainContent.style.transform = 'translateY(0)';
+            mainContent.style.pointerEvents = 'auto'; // Riabilita le interazioni
+            mostraSezione('home'); // Mostra la sezione home
+        }, { once: true });
+    }
+
+    // Funzione per verificare la password
     function verificaAccesso() {
       if (sessionStorage.getItem('accessoBearFC') === 'concesso') {
-        accessoConsentito = true;
         return true;
       }
 
       const passwordInserita = prompt("Inserisci la password per accedere al sito Bear F.C.:");
       if (passwordInserita === passwordCorretta) {
-        accessoConsentito = true;
         sessionStorage.setItem('accessoBearFC', 'concesso');
-        document.body.style.display = 'flex';
         return true;
       } else if (passwordInserita !== null) {
         alert("Password errata. Accesso negato.");
         return false;
       } else {
-        return false;
+        return false; // Utente ha annullato
       }
     }
 
     function mostraSezione(id) {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('squadra').style.display = 'none';
-      document.getElementById('notizie').style.display = 'none';
-      document.getElementById('storia').style.display = 'none';
-      document.getElementById('contatti').style.display = 'none';
-      document.getElementById('maglie').style.display = 'none';
-      document.getElementById('statistiche').style.display = 'none';
-
+      // Nasconde tutte le sezioni
+      document.querySelectorAll('main section').forEach(section => {
+        section.style.display = 'none';
+      });
+      // Mostra la sezione desiderata
       document.getElementById(id).style.display = 'block';
     }
 
+    // Esegui questo codice una volta che la pagina è completamente caricata
     window.onload = function() {
-        if (verificaAccesso()) {
-            mostraSezione('home');
-        }
+        // Nasconde il contenuto principale all'inizio
+        document.getElementById('main-content').style.opacity = '0';
+        document.getElementById('main-content').style.transform = 'translateY(-50px)';
+        document.getElementById('main-content').style.pointerEvents = 'none';
+
+        // Chiedi la password subito dopo il caricamento della pagina
+        setTimeout(() => {
+            if (verificaAccesso()) {
+                revealContentSimple(); // Chiama la funzione semplificata
+            } else {
+                // Se l'accesso è negato o annullato, nascondi l'intro screen e mostra il messaggio di errore
+                const introScreen = document.getElementById('intro-screen');
+                introScreen.style.opacity = '0'; // Fade out intro screen
+                introScreen.addEventListener('transitionend', () => {
+                    introScreen.style.display = 'none';
+                    // Mostra il messaggio di accesso negato
+                    document.body.innerHTML = '<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; color: #eee;"><h1 style="color: red;">Accesso Negato</h1><p>Non hai i permessi per visualizzare questa pagina.</p></div>';
+                }, { once: true });
+            }
+        }, 100); // Breve ritardo per evitare che il prompt appaia prima che il DOM sia completamente pronto
     };
   </script>
 </body>
