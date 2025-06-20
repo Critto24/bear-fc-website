@@ -108,7 +108,7 @@
     }
     main {
       flex: 1;
-      padding: 20px;
+      padding: 20px; /* Padding generale per il main */
       background: url('https://images.unsplash.com/photo-1510192022794-63b7c2b01c38?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fA%3D%3D') no-repeat center center fixed;
       background-size: cover;
       position: relative;
@@ -132,6 +132,10 @@
       margin-bottom: 30px;
       box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
       animation: sectionFadeIn 1s ease-out;
+      /* Assicurati che le sezioni stesse non causino overflow */
+      max-width: calc(100% - 40px); /* 100% meno il padding di main */
+      margin-left: auto;
+      margin-right: auto;
     }
     section h2 {
         font-family: 'Montserrat', sans-serif;
@@ -166,6 +170,10 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0,255,0,0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       border: 1px solid #0f0;
+      /* Rendiamo le larghezze più flessibili per il desktop ma con un max-width */
+      width: auto; /* Lascia che il contenuto decida la larghezza o usa flex-basis */
+      flex-basis: auto; /* Rimosso per default */
+      min-width: 280px; /* Minimo per non diventare troppo stretta su schermi intermedi */
     }
     .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-list:hover, .statistiche-classifiche:hover {
       transform: translateY(-8px);
@@ -175,8 +183,7 @@
 
     /* Stile per Giocatori (lista più strutturata) */
     .giocatori {
-        width: 300px;
-        max-width: 100%; /* Assicurati che non vada oltre il 100% */
+        max-width: 300px;
     }
     .giocatori h3 {
         font-family: 'Montserrat', sans-serif;
@@ -206,14 +213,12 @@
 
     /* Stili per le notizie e pagellino */
     .notizia-item {
-      width: 400px; /* Larghezza predefinita per le notizie */
-      max-width: 100%; /* Assicurati che non vada oltre il 100% */
+      max-width: 400px; /* Larghezza predefinita per le notizie */
       border-left: 5px solid #0f0;
     }
     /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
     .notizia-item.pagellino {
-        width: 280px; /* Larghezza ridotta */
-        max-width: 90%; /* Per responsività su schermi piccoli */
+        max-width: 280px; /* Larghezza ridotta */
         padding: 15px; /* Riduci padding generale per un aspetto più compatto */
     }
     .notizia-item h3 {
@@ -265,8 +270,7 @@
     }
 
     .storia-sezione {
-      width: 500px;
-      max-width: 100%; /* Assicurati che non vada oltre il 100% */
+      max-width: 500px;
       text-align: justify;
       border-right: 5px solid #0f0;
     }
@@ -284,8 +288,7 @@
     }
 
     .contatti-info {
-        width: 300px;
-        max-width: 100%; /* Assicurati che non vada oltre il 100% */
+        max-width: 300px;
         border: 1px solid #0f0;
     }
     .contatti-info h3 {
@@ -311,8 +314,7 @@
 
     /* Stile per la nuova sezione Maglie */
     #maglie .maglia-item {
-        width: 320px;
-        max-width: 100%; /* Assicurati che non vada oltre il 100% */
+        max-width: 320px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -321,7 +323,7 @@
         min-height: 280px;
         border: 2px solid #0f0;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0,255,0,0.3);
-        position: relative; /* Importante per posizionare l'immagine della maglia all'interno se non usi il background */
+        position: relative;
     }
     #maglie .maglia-item img {
         max-width: 90%; /* Assicurati che l'immagine si adatti al contenitore */
@@ -330,7 +332,6 @@
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         margin-bottom: 15px;
     }
-    /* Rimosso il blocco .maglia-logo qui */
     #maglie .maglia-item p {
         font-size: 1.2em;
         color: #0f0;
@@ -496,20 +497,27 @@
     }
 
     /* Media Queries per la responsività */
+
+    /* Stili per schermi di tablet e smartphone più grandi (fino a 768px) */
     @media (max-width: 768px) {
       /* Adatta il padding delle sezioni su schermi più piccoli */
       section {
         padding: 15px;
+        /* Riduci il max-width delle sezioni principali per schermi stretti */
+        max-width: calc(100% - 20px); /* Un po' meno padding sul main */
+      }
+      main {
+        padding: 10px; /* Riduci il padding del main su schermi più piccoli */
       }
       .contenuto {
         flex-direction: column;
         align-items: center;
-        gap: 20px; /* Riduci il gap tra gli elementi per occupare meno spazio */
+        gap: 15px; /* Riduci il gap tra gli elementi per occupare meno spazio */
       }
-      /* Tutti gli elementi con classe card devono essere fluidi */
-      .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
+      /* Tutti gli elementi con classe card devono essere fluidi e avere un margine laterale */
+      .giocatori, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
         width: 95%; /* Lascia un piccolo margine sui lati */
-        max-width: none; /* Rimuove il max-width fisso per i breakpoint più grandi */
+        max-width: none; /* Rimuove il max-width fisso per i breakpoint più grandi, lascia che si adatti al 95% */
         margin-bottom: 15px; /* Riduci margine inferiore */
       }
       /* Specifico per il pagellino su schermi piccoli */
@@ -519,23 +527,76 @@
       }
       .notizia-item.pagellino p,
       .notizia-item.pagellino ul li {
-          font-size: 0.9em; /* Riduci dimensione del testo per farlo stare meglio */
+          font-size: 0.88em; /* Riduci dimensione del testo per farlo stare meglio */
           line-height: 1.3em;
       }
       .notizia-item.pagellino .mvp {
-          font-size: 1.3em; /* Riduci dimensione dell'MVP */
+          font-size: 1.2em; /* Riduci dimensione dell'MVP */
       }
 
       nav a {
-        margin: 5px 10px;
-        padding: 6px 12px;
-        font-size: 0.9em;
+        margin: 5px 8px; /* Riduci margine tra gli elementi della nav */
+        padding: 6px 10px;
+        font-size: 0.85em; /* Riduci dimensione del testo della nav */
       }
       #statistiche .statistiche-container {
           flex-direction: column;
           align-items: center;
           gap: 20px;
       }
+    }
+
+    /* Stili per schermi di smartphone molto piccoli (fino a 480px) */
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.8em; /* Riduci la dimensione del titolo in header */
+        }
+        header p {
+            font-size: 0.9em; /* Riduci la dimensione del sottotitolo in header */
+        }
+        nav a {
+            margin: 3px 5px; /* Riduci ulteriormente il margine tra gli elementi della nav */
+            padding: 5px 8px;
+            font-size: 0.75em; /* Riduci ulteriormente la dimensione del testo della nav */
+        }
+        main {
+            padding: 5px; /* Riduci il padding del main */
+        }
+        section {
+            padding: 10px; /* Riduci il padding delle sezioni */
+            margin-bottom: 20px; /* Riduci il margine inferiore */
+            max-width: calc(100% - 10px); /* 100% meno un padding minimo */
+        }
+        section h2 {
+            font-size: 1.5em; /* Riduci la dimensione dei titoli delle sezioni */
+            margin-bottom: 15px;
+        }
+        .giocatori, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
+            padding: 15px; /* Riduci il padding delle card */
+            margin-bottom: 10px; /* Riduci ulteriormente il margine inferiore */
+            min-width: unset; /* Rimuovi il min-width per adattarsi a schermi piccolissimi */
+        }
+        .notizia-item p, .storia-sezione p, .contatti-info p {
+            font-size: 0.9em; /* Riduci la dimensione del testo del corpo */
+            line-height: 1.25em;
+        }
+        #maglie .maglia-item img {
+            max-width: 95%; /* Assicurati che l'immagine occupi quasi tutta la larghezza */
+        }
+        #maglie .maglia-item p {
+            font-size: 1em; /* Riduci la dimensione del testo sotto la maglia */
+        }
+        #maglie .maglia-item .in-arrivo {
+            font-size: 1.8em; /* Riduci la dimensione del "IN ARRIVO" */
+        }
+        #home p {
+            font-size: 1em; /* Riduci la dimensione del testo della sezione Home */
+            line-height: 1.5em;
+        }
+        #home button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
     }
 
   </style>
@@ -641,8 +702,7 @@
       <section id="notizie">
         <h2>Ultime Notizie</h2>
         <div class="contenuto">
-            <div class="notizia-item" style="width: 400px;">
-                <h3>Ritorno inaspettato del Bomber</h3>
+            <div class="notizia-item"> <h3>Ritorno inaspettato del Bomber</h3>
                 <p>Dopo due mesi di stop forzato a causa di un infortunio, il nostro centrocampista Giovanni Cascone ha annunciato il suo ritorno in campo per la partita di domani. Un rientro attesissimo che rafforza la squadra!</p>
                 <small>Data: 20 Giugno 2025</small>
             </div>
