@@ -59,6 +59,7 @@
     }
     header img {
       max-width: 150px;
+      width: 100%; /* Aggiunto width: 100% per fluidità */
       border-radius: 50%;
       border: 3px solid #fff;
       box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
@@ -126,7 +127,7 @@
       position: relative;
       z-index: 2;
       background: rgba(34, 34, 34, 0.9);
-      padding: 25px;
+      padding: 25px; /* Padding di base per le sezioni */
       border-radius: 15px;
       margin-bottom: 30px;
       box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
@@ -175,6 +176,7 @@
     /* Stile per Giocatori (lista più strutturata) */
     .giocatori {
         width: 300px;
+        max-width: 100%; /* Assicurati che non vada oltre il 100% */
     }
     .giocatori h3 {
         font-family: 'Montserrat', sans-serif;
@@ -205,13 +207,13 @@
     /* Stili per le notizie e pagellino */
     .notizia-item {
       width: 400px; /* Larghezza predefinita per le notizie */
+      max-width: 100%; /* Assicurati che non vada oltre il 100% */
       border-left: 5px solid #0f0;
     }
     /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
     .notizia-item.pagellino {
         width: 280px; /* Larghezza ridotta */
         max-width: 90%; /* Per responsività su schermi piccoli */
-        /* --- MODIFICHE PER RIDURRE L'ALTEZZA DEL PAGELLINO --- */
         padding: 15px; /* Riduci padding generale per un aspetto più compatto */
     }
     .notizia-item h3 {
@@ -264,6 +266,7 @@
 
     .storia-sezione {
       width: 500px;
+      max-width: 100%; /* Assicurati che non vada oltre il 100% */
       text-align: justify;
       border-right: 5px solid #0f0;
     }
@@ -282,6 +285,7 @@
 
     .contatti-info {
         width: 300px;
+        max-width: 100%; /* Assicurati che non vada oltre il 100% */
         border: 1px solid #0f0;
     }
     .contatti-info h3 {
@@ -308,6 +312,7 @@
     /* Stile per la nuova sezione Maglie */
     #maglie .maglia-item {
         width: 320px;
+        max-width: 100%; /* Assicurati che non vada oltre il 100% */
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -316,6 +321,7 @@
         min-height: 280px;
         border: 2px solid #0f0;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0,255,0,0.3);
+        position: relative; /* Importante per posizionare l'immagine della maglia all'interno se non usi il background */
     }
     #maglie .maglia-item img {
         max-width: 90%; /* Assicurati che l'immagine si adatti al contenitore */
@@ -324,19 +330,7 @@
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         margin-bottom: 15px;
     }
-    #maglie .maglia-item .maglia-logo {
-        position: absolute; /* Rendi la posizione relativa all'elemento .maglia-item genitore */
-        top: 20px; /* Regola per posizionare il logo sulla maglia */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px; /* Dimensione del logo sulla maglia */
-        height: 80px;
-        background-image: url('bear-fc-logo.jpg'); /* Nome corretto del file logo */
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        z-index: 5;
-    }
+    /* Rimosso il blocco .maglia-logo qui */
     #maglie .maglia-item p {
         font-size: 1.2em;
         color: #0f0;
@@ -503,14 +497,35 @@
 
     /* Media Queries per la responsività */
     @media (max-width: 768px) {
+      /* Adatta il padding delle sezioni su schermi più piccoli */
+      section {
+        padding: 15px;
+      }
       .contenuto {
         flex-direction: column;
         align-items: center;
+        gap: 20px; /* Riduci il gap tra gli elementi per occupare meno spazio */
       }
+      /* Tutti gli elementi con classe card devono essere fluidi */
       .giocatori, .formazione, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
-        width: 90%;
-        max-width: none;
+        width: 95%; /* Lascia un piccolo margine sui lati */
+        max-width: none; /* Rimuove il max-width fisso per i breakpoint più grandi */
+        margin-bottom: 15px; /* Riduci margine inferiore */
       }
+      /* Specifico per il pagellino su schermi piccoli */
+      .notizia-item.pagellino {
+          width: 95%; /* Ancora più largo per occupare lo spazio disponibile */
+          padding: 10px; /* Riduci ulteriormente il padding */
+      }
+      .notizia-item.pagellino p,
+      .notizia-item.pagellino ul li {
+          font-size: 0.9em; /* Riduci dimensione del testo per farlo stare meglio */
+          line-height: 1.3em;
+      }
+      .notizia-item.pagellino .mvp {
+          font-size: 1.3em; /* Riduci dimensione dell'MVP */
+      }
+
       nav a {
         margin: 5px 10px;
         padding: 6px 12px;
@@ -574,7 +589,6 @@
           <div class="contenuto">
               <div class="maglia-item">
                   <img src="maglia-calcio.jpg" alt="Maglia Bear F.C. 2024/2025">
-                  <div class="maglia-logo"></div>
                   <p>Stagione 2024/2025</p>
               </div>
               <div class="maglia-item">
