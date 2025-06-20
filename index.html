@@ -6,6 +6,11 @@
   <title>Bear F.C.</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
+    /* Global Box-Sizing for better layout control */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     /* GENERAL BODY STYLES */
     body {
       font-family: 'Lato', sans-serif;
@@ -133,7 +138,8 @@
       box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
       animation: sectionFadeIn 1s ease-out;
       /* Assicurati che le sezioni stesse non causino overflow */
-      max-width: calc(100% - 40px); /* 100% meno il padding di main */
+      max-width: 900px; /* Larghezza massima per le sezioni su desktop */
+      width: 100%; /* Permette alla sezione di restringersi */
       margin-left: auto;
       margin-right: auto;
     }
@@ -171,8 +177,8 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       border: 1px solid #0f0;
       /* Rendiamo le larghezze più flessibili per il desktop ma con un max-width */
-      width: auto; /* Lascia che il contenuto decida la larghezza o usa flex-basis */
-      flex-basis: auto; /* Rimosso per default */
+      width: 100%; /* Sarà limitato da max-width */
+      max-width: 500px; /* Default max-width per tutte le card */
       min-width: 280px; /* Minimo per non diventare troppo stretta su schermi intermedi */
     }
     .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-list:hover, .statistiche-classifiche:hover {
@@ -183,7 +189,7 @@
 
     /* Stile per Giocatori (lista più strutturata) */
     .giocatori {
-        max-width: 300px;
+        max-width: 300px; /* Override per questa card */
     }
     .giocatori h3 {
         font-family: 'Montserrat', sans-serif;
@@ -213,12 +219,12 @@
 
     /* Stili per le notizie e pagellino */
     .notizia-item {
-      max-width: 400px; /* Larghezza predefinita per le notizie */
+      max-width: 400px; /* Override per questa card */
       border-left: 5px solid #0f0;
     }
     /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
     .notizia-item.pagellino {
-        max-width: 280px; /* Larghezza ridotta */
+        max-width: 280px; /* Override per questa card */
         padding: 15px; /* Riduci padding generale per un aspetto più compatto */
     }
     .notizia-item h3 {
@@ -270,7 +276,7 @@
     }
 
     .storia-sezione {
-      max-width: 500px;
+      max-width: 500px; /* Override per questa card */
       text-align: justify;
       border-right: 5px solid #0f0;
     }
@@ -288,7 +294,7 @@
     }
 
     .contatti-info {
-        max-width: 300px;
+        max-width: 300px; /* Override per questa card */
         border: 1px solid #0f0;
     }
     .contatti-info h3 {
@@ -314,7 +320,7 @@
 
     /* Stile per la nuova sezione Maglie */
     #maglie .maglia-item {
-        max-width: 320px;
+        max-width: 320px; /* Override per questa card */
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -500,14 +506,14 @@
 
     /* Stili per schermi di tablet e smartphone più grandi (fino a 768px) */
     @media (max-width: 768px) {
-      /* Adatta il padding delle sezioni su schermi più piccoli */
+      /* Riduci il padding del main su schermi più piccoli */
+      main {
+        padding: 10px;
+      }
       section {
         padding: 15px;
-        /* Riduci il max-width delle sezioni principali per schermi stretti */
-        max-width: calc(100% - 20px); /* Un po' meno padding sul main */
-      }
-      main {
-        padding: 10px; /* Riduci il padding del main su schermi più piccoli */
+        /* La larghezza massima della sezione sarà il 100% meno il padding del main */
+        max-width: calc(100% - 20px); 
       }
       .contenuto {
         flex-direction: column;
@@ -516,13 +522,14 @@
       }
       /* Tutti gli elementi con classe card devono essere fluidi e avere un margine laterale */
       .giocatori, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
-        width: 95%; /* Lascia un piccolo margine sui lati */
-        max-width: none; /* Rimuove il max-width fisso per i breakpoint più grandi, lascia che si adatti al 95% */
+        width: 100%; /* Occupano tutta la larghezza disponibile all'interno del loro contenitore */
+        max-width: 95%; /* Lascia un piccolo margine sui lati rispetto al 100% del contenitore */
         margin-bottom: 15px; /* Riduci margine inferiore */
+        min-width: unset; /* Rimuovi min-width per questi schermi */
       }
       /* Specifico per il pagellino su schermi piccoli */
       .notizia-item.pagellino {
-          width: 95%; /* Ancora più largo per occupare lo spazio disponibile */
+          max-width: 95%; /* Ancora più largo per occupare lo spazio disponibile */
           padding: 10px; /* Riduci ulteriormente il padding */
       }
       .notizia-item.pagellino p,
@@ -574,7 +581,7 @@
         .giocatori, .notizia-item, .storia-sezione, .contatti-info, .maglia-item, .statistiche-list, .statistiche-classifiche {
             padding: 15px; /* Riduci il padding delle card */
             margin-bottom: 10px; /* Riduci ulteriormente il margine inferiore */
-            min-width: unset; /* Rimuovi il min-width per adattarsi a schermi piccolissimi */
+            max-width: 100%; /* Occupa tutta la larghezza disponibile */
         }
         .notizia-item p, .storia-sezione p, .contatti-info p {
             font-size: 0.9em; /* Riduci la dimensione del testo del corpo */
@@ -702,7 +709,8 @@
       <section id="notizie">
         <h2>Ultime Notizie</h2>
         <div class="contenuto">
-            <div class="notizia-item"> <h3>Ritorno inaspettato del Bomber</h3>
+            <div class="notizia-item">
+                <h3>Ritorno inaspettato del Bomber</h3>
                 <p>Dopo due mesi di stop forzato a causa di un infortunio, il nostro centrocampista Giovanni Cascone ha annunciato il suo ritorno in campo per la partita di domani. Un rientro attesissimo che rafforza la squadra!</p>
                 <small>Data: 20 Giugno 2025</small>
             </div>
