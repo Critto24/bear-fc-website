@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bear F.C.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
     /* Global Box-Sizing for better layout control */
     *, *::before, *::after {
@@ -33,18 +34,70 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #111; /* Sfondo nero per l'intro */
+      /* NUOVO: Sfondo dell'immagine della foresta per l'intro screen */
+      background: url('photo-1542273917363-3b1817f69a2d.jpg') no-repeat center center fixed;
+      background-size: cover;
       z-index: 9999;
       display: flex;
+      flex-direction: column; /* Per allineare testo e logo */
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      opacity: 1;
+      opacity: 0; /* Inizialmente nascosto - apparirà dopo la password */
       transition: opacity 0.5s ease-out; /* Transizione per il fade-out dell'intro */
-      /* STILI PER L'INTRO SCREEN (NERO E DORATO) */
+      
+      /* STILI PER L'INTRO SCREEN (BORDO E OMBRA DORATA SUL TESTO) */
       border: 5px solid gold; /* Bordo più spesso per l'intro */
       box-shadow: 0 0 50px gold; /* Ombra dorata più pronunciata */
     }
+    /* Overlay scuro per migliorare la leggibilità del testo sull'immagine della foresta */
+    #intro-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4); /* Overlay scuro, leggermente meno opaco per far vedere la nebbia */
+      z-index: 1; /* Sotto il testo e il logo, sopra l'immagine di sfondo */
+    }
+
+    /* Stile per il logo all'interno dell'intro screen */
+    #intro-screen img.intro-logo {
+        max-width: 180px; /* Dimensione del logo nell'intro */
+        width: 100%;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.7); /* Ombra verde per il logo */
+        margin-bottom: 20px; /* Spazio sotto il logo */
+        z-index: 2; /* Sopra l'overlay */
+        opacity: 0; /* Inizialmente nascosto */
+        animation: fadeInLogoIntro 1s forwards ease-out 0.8s; /* Appare dopo il testo */
+    }
+
+    /* Animazione per l'opacità del logo per l'effetto sfumato */
+    @keyframes fadeInLogoIntro {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 0.8; transform: translateY(0); } /* Leggermente trasparente per l'effetto nebbia */
+    }
+
+    /* Testo nell'intro screen - QUESTO È STATO RIMOSSO DALL'HTML, QUINDI QUESTI STILI NON SONO PIÙ APPLICATI */
+    /* #intro-screen p {
+        font-family: 'Montserrat', sans-serif;
+        color: gold;
+        font-size: 2.2em;
+        text-shadow: 0 0 20px gold;
+        margin-top: 0;
+        opacity: 0;
+        animation: fadeInTextIntro 1s forwards ease-out 0.5s;
+        z-index: 2;
+    } */
+    /* Animazione per l'opacità del testo per l'effetto sfumato */
+    /* @keyframes fadeInTextIntro {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 0.8; transform: translateY(0); }
+    } */
+
 
     /* Main Content Container */
     #main-content {
@@ -131,20 +184,10 @@
     main {
       flex: 1;
       padding: 20px; /* Padding generale per il main */
-      background: url('https://images.unsplash.com/photo-1510192022794-63b7c2b01c38?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fHx8fA%3D%3D') no-repeat center center fixed;
-      background-size: cover;
+      /* Sfondo di MAIN rimosso, ora è lo sfondo del body (nero) */
       position: relative;
     }
-    main::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
+    
     section {
       position: relative;
       z-index: 2;
@@ -212,7 +255,7 @@
       max-width: 500px; /* Default max-width per tutte le card */
       min-width: 280px; /* Minimo per non diventare troppo stretta su schermi intermedi */
     }
-    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-list:hover, .statistiche-classifiche:hover, .premiazioni-classifica:hover {
+    .giocatori:hover, .formazione:hover, .notizia-item:hover, .storia-sezione:hover, .contatti-info:hover, .maglia-item:hover, .statistiche-list:hover, .premiazioni-classifica:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 25px rgba(0, 255, 0, 0.6), 0 0 20px rgba(0,255,0,0.8);
       border-color: #7f7;
@@ -273,16 +316,14 @@
       font-size: 1.1em;
       line-height: 1.5em;
     }
-    /* Specific style for attackers *names* to not be green, but the *title* of 'Attaccanti' to be green */
+
+    /* REGOLE PER I COLORI DEI TESTI DEI GIOCATORI */
     .giocatori li strong {
-        color: #0f0; /* Default green for all position titles */
+        color: #eee; /* Colore default per i nomi dei giocatori (bianco/grigio chiaro) */
     }
-    /* Override for player names to be light gray */
-    .giocatori li strong:not(:has(span.icon)) { /* Selects strong tags that are NOT preceded by an icon (i.e., player names) */
-        color: #eee;
-    }
-    .giocatori li strong:has(span.icon) { /* Selects strong tags that ARE preceded by an icon (i.e., position titles) */
-        color: #0f0; /* Ensure position titles remain green */
+
+    .giocatori li span.icon + strong {
+        color: #0f0; /* Colore per i titoli di ruolo (verde) */
     }
 
     .giocatori li .icon {
@@ -405,7 +446,7 @@
         position: relative;
     }
     #maglie .maglia-item img {
-        max-width: 90%; /* Assicurati che l'immagine si adatti al contenitore */
+        max-width: 90%; /* Assicurati che l'immagine si adatta al contenitore */
         height: auto;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
@@ -657,10 +698,13 @@
 </head>
 <body>
 
-  <div id="intro-screen">
+  
+<div id="intro-screen">
+    <img src="bear-fc-logo.jpg" alt="Bear F.C. Logo" class="intro-logo" />
     </div>
 
-  <div id="main-content">
+  
+<div id="main-content">
     <header>
       <img src="bear-fc-logo.jpg" alt="Bear F.C. Logo" />
       <h1>Bear F.C.</h1>
@@ -720,7 +764,8 @@
               <div class="statistiche-list">
                   <h3>Record Squadra</h3>
                   <ul>
-                      </ul>
+                      
+</ul>
                   <h3>Gol e Assist Totali</h3>
                   <ul>
                       <li><strong>Cristian:</strong> 137 Gol, 60 Assist</li>
@@ -741,7 +786,8 @@
           </div>
       </section>
 
-      <section id="premiazioni">
+      
+<section id="premiazioni">
           <h2>Premiazioni</h2>
           <div class="contenuto">
               <div class="premiazioni-classifica">
@@ -774,7 +820,8 @@
       <section id="notizie">
         <h2>Ultime Notizie</h2>
         <div class="contenuto">
-            <div class="notizia-item">
+            
+<div class="notizia-item">
                 <h3>Partita Ricca di Emozioni alla Smigo Arena</h3>
                 <p>È stata una partita ricca di emozioni nella Smigo Arena. Nonostante una forte pioggia, che non ha fermato i nostri giocatori dal cercare la vittoria, la squadra ha dato il massimo. Il Bomber ha debuttato con un incredibile poker di gol, offrendo una grande prestazione. Ma su tutti si è distinto Lorenzo Marchetti con una prestazione incredibile, segnando ben 11 gol, incluso un eurogol memorabile.</p>
                 <small>Data: 25 Giugno 2025</small>
@@ -784,10 +831,11 @@
                 <p>Dopo due mesi di stop forzato a causa di un infortunio, il nostro centrocampista Giovanni Cascone ha annunciato il suo ritorno in campo per la partita di domani. Un rientro attesissimo che rafforza la squadra!</p>
                 <small>Data: 20 Giugno 2025</small>
             </div>
-            <div class="notizia-item pagellino">
+            
+<div class="notizia-item pagellino">
                 <h3>Pagellino Partita Sabato 14 Giugno</h3>
                 <div class="pagellino-container">
-                    <p>Un'altra grande giornata di calcio per il Bear F.C.! La squadra ha dimostrato grinta e determinazione in campo, portando a casa un risultato importante. Ecco i voti della partita:</p>
+                    <p>Un'altra grande giornata di calcio per il Bear F.C., con prestazioni individuali di alto livello! Ecco i voti della partita:</p>
                     <ul>
                         <li><strong>Vincenzo:</strong> 7</li>
                         <li><strong>Stefano:</strong> 8-</li>
@@ -808,7 +856,8 @@
                 </div>
                 <small>Data: 14 Giugno 2025</small>
             </div>
-            <div class="notizia-item pagellino">
+            
+<div class="notizia-item pagellino">
                 <h3>Pagellino Partita Sabato 21 Giugno</h3>
                 <div class="pagellino-container">
                     <p>Una partita eccezionale per il Bear F.C., con prestazioni individuali di alto livello! Ecco i voti della partita:</p>
@@ -875,30 +924,36 @@
     <footer>
       &copy; 2025 Bear F.C. - Tutti i diritti riservati
     </footer>
-  </div> <script>
-    const passwordCorretta = "amicibearfc"; // <<< CAMBIA QUI LA TUA PASSWORD!
+  </div> 
+<script>
+    const passwordCorretta = "amicibearfc"; // <<< CAMBIA QUI LA TUAPASSWORD!
 
-    // Funzione per rivelare il contenuto con un semplice fade-in e discesa
-    function revealContentSimple() {
+    // Funzione per mostrare l'animazione dell'orso e poi rivelare il contenuto
+    function showIntroAndRevealContent() {
         const introScreen = document.getElementById('intro-screen');
         const mainContent = document.getElementById('main-content');
+        
+        // Rende visibile l'intro screen
+        introScreen.style.opacity = '1';
 
-        // Nasconde l'intro screen con un fade-out
-        introScreen.style.opacity = '0';
-        introScreen.addEventListener('transitionend', () => {
-            introScreen.style.display = 'none'; // Rimuove l'intro screen
-            
-            // Rende visibile il contenuto principale e lo fa scendere
-            mainContent.style.opacity = '1';
-            mainContent.style.transform = 'translateY(0)';
-            mainContent.style.pointerEvents = 'auto'; // Riabilita le interazioni
-            
-            // Aggiungi un piccolo ritardo prima di mostrare la sezione home
-            // Questo aiuta a garantire che il main-content sia completamente reso visibile
-            setTimeout(() => {
-                mostraSezione('home'); // Mostra la sezione home dopo un breve ritardo
-            }, 50); // 50 millisecondi di ritardo
-        }, { once: true });
+        // L'animazione dell'intro è ora solo il logo che appare
+        setTimeout(() => {
+            // Nasconde l'intro screen con un fade-out
+            introScreen.style.opacity = '0';
+            introScreen.addEventListener('transitionend', () => {
+                introScreen.style.display = 'none'; // Rimuove l'intro screen
+                
+                // Rende visibile il contenuto principale e lo fa scendere
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'translateY(0)';
+                mainContent.style.pointerEvents = 'auto'; // Riabilita le interazioni
+                
+                // Aggiungi un piccolo ritardo prima di mostrare la sezione home
+                setTimeout(() => {
+                    mostraSezione('home'); // Mostra la sezione home dopo un breve ritardo
+                }, 50); 
+            }, { once: true });
+        }, 3000); // Durata di visualizzazione della schermata intro (Immagine + logo) prima del fade-out
     }
 
     // Funzione per verificare la password
@@ -935,21 +990,22 @@
         document.getElementById('main-content').style.transform = 'translateY(-50px)';
         document.getElementById('main-content').style.pointerEvents = 'none';
 
-        // Chiedi la password subito dopo il caricamento della pagina
+        // Nasconde l'intro-screen all'inizio (opacity: 0)
+        document.getElementById('intro-screen').style.opacity = '0'; 
+
+        // Chiedi la password subito al caricamento della pagina
+        // Aggiungi un brevissimo ritardo per assicurare che il DOM sia pronto
         setTimeout(() => {
             if (verificaAccesso()) {
-                revealContentSimple(); // Chiama la funzione semplificata
+                // Se la password è corretta, mostra l'intro screen e poi avvia la transizione
+                document.getElementById('intro-screen').style.opacity = '1'; // Rendi visibile l'intro screen
+                document.getElementById('intro-screen').style.display = 'flex'; // Assicurati che sia flex per centrare il contenuto
+                showIntroAndRevealContent(); // Ora usa la funzione aggiornata
             } else {
-                // Se l'accesso è negato o annullato, nascondi l'intro screen e mostra il messaggio di errore
-                const introScreen = document.getElementById('intro-screen');
-                introScreen.style.opacity = '0'; // Fade out intro screen
-                introScreen.addEventListener('transitionend', () => {
-                    introScreen.style.display = 'none';
-                    // Mostra il messaggio di accesso negato
-                    document.body.innerHTML = '<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; color: #eee;"><h1 style="color: red;">Accesso Negato</h1><p>Non hai i permessi per visualizzare questa pagina.</p></div>';
-                }, { once: true });
+                // Se l'accesso è negato o annullato, mostra il messaggio di errore
+                document.body.innerHTML = '<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; color: #eee;"><h1 style="color: red;">Accesso Negato</h1><p>Non hai i permessi per visualizzare questa pagina.</p></div>';
             }
-        }, 100); // Breve ritardo per evitare che il prompt appaia prima che il DOM sia completamente pronto
+        }, 100); 
     };
   </script>
 </body>
