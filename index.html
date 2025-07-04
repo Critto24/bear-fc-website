@@ -45,10 +45,6 @@
       overflow: hidden;
       opacity: 0; /* Inizialmente nascosto - apparirà dopo la password */
       transition: opacity 0.5s ease-out; /* Transizione per il fade-out dell'intro */
-      
-      /* STILI PER L'INTRO SCREEN (BORDO E OMBRA DORATA SUL TESTO) - RIMOSSI */
-      /* border: 5px solid gold; */
-      /* box-shadow: 0 0 50px gold; */
     }
     /* Overlay scuro per migliorare la leggibilità del testo sull'immagine della foresta */
     #intro-screen::before {
@@ -80,24 +76,6 @@
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 0.8; transform: translateY(0); } /* Leggermente trasparente per l'effetto nebbia */
     }
-
-    /* Testo nell'intro screen - QUESTO È STATO RIMOSSO DALL'HTML, QUINDI QUESTI STILI NON SONO PIÙ APPLICATI */
-    /* #intro-screen p {
-        font-family: 'Montserrat', sans-serif;
-        color: gold;
-        font-size: 2.2em;
-        text-shadow: 0 0 20px gold;
-        margin-top: 0;
-        opacity: 0;
-        animation: fadeInTextIntro 1s forwards ease-out 0.5s;
-        z-index: 2;
-    } */
-    /* Animazione per l'opacità del testo per l'effetto sfumato */
-    /* @keyframes fadeInTextIntro {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 0.8; transform: translateY(0); }
-    } */
-
 
     /* Main Content Container */
     #main-content {
@@ -203,6 +181,11 @@
       margin-left: auto;
       margin-right: auto;
     }
+    /* Stile specifico per la sezione Notizie */
+    #notizie .contenuto {
+        flex-direction: column; /* Impila le card verticalmente nella sezione Notizie */
+        gap: 30px; /* Spazio tra le card di notizie */
+    }
 
     /* Stili specifici per la nuova sezione Premiazioni (Nero e Oro) */
     #premiazioni {
@@ -289,10 +272,29 @@
         font-size: 1.1em;
         color: #eee;
     }
+    /* Stile specifico per il testo dorato nelle classifiche premiazioni */
     .premiazioni-classifica ol li span {
         color: gold; /* Numero di gol/assist/MVP in oro */
         font-weight: normal;
     }
+    /* Stile specifico per la classifica del Pallone d'Oro (MVP) */
+    .premiazioni-classifica.mvp-classifica {
+        border: 2px solid gold; /* Bordo più spesso e dorato */
+        box-shadow: 0 0 30px gold; /* Ombra più intensa e dorata */
+    }
+    .premiazioni-classifica.mvp-classifica h3 {
+        color: #FFD700; /* Oro più acceso per il titolo MVP */
+        text-shadow: 0 0 10px #FFD700;
+    }
+    .premiazioni-classifica.mvp-classifica ol li {
+        color: #fff; /* Nome giocatore bianco */
+    }
+    .premiazioni-classifica.mvp-classifica ol li span {
+        color: #FFD700; /* Contatore MVP oro acceso */
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
 
     /* Stile per Giocatori (lista più strutturata) */
     .giocatori {
@@ -333,61 +335,92 @@
 
     /* Stili per le notizie e pagellino */
     .notizia-item {
-      max-width: 400px; /* Override per questa card */
+      max-width: 600px; /* Larghezza maggiore per le notizie testuali */
       border-left: 5px solid #0f0;
-    }
-    /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
-    .notizia-item.pagellino {
-        max-width: 280px; /* Override per questa card */
-        padding: 15px; /* Riduci padding generale per un aspetto più compatto */
+      text-align: left; /* Allinea il testo a sinistra */
     }
     .notizia-item h3 {
       font-family: 'Montserrat', sans-serif;
       color: #0f0;
       margin-top: 0;
-      padding-bottom: 5px; /* Ulteriore riduzione padding-bottom */
-      margin-bottom: 8px; /* Ulteriore riduzione margin-bottom */
+      padding-bottom: 5px;
+      margin-bottom: 8px;
     }
     .notizia-item p {
-      font-size: 0.95em; /* Leggermente più piccolo per ridurre l'altezza */
-      line-height: 1.3em; /* Ridotto il line-height per stringere il testo */
+      font-size: 0.95em;
+      line-height: 1.5em;
       text-align: justify;
-      margin-bottom: 8px; /* Ridotto margine inferiore */
+      margin-bottom: 8px;
     }
     .notizia-item small {
       display: block;
       text-align: right;
       color: #bbb;
-      margin-top: 8px; /* Ridotto margine superiore */
-      font-size: 0.75em; /* Ulteriore riduzione dimensione carattere */
+      margin-top: 8px;
+      font-size: 0.75em;
     }
-    .pagellino-container {
-        text-align: left;
-        line-height: 1.4em; /* Ulteriore riduzione line-height generale del pagellino */
+
+    /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
+    .notizia-item.pagellino {
+        max-width: 280px; /* Override per questa card */
+        padding: 15px; /* Riduci padding generale per un aspetto più compatto */
+        text-align: center; /* Centra il contenuto del pagellino */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .notizia-item.pagellino .pagellino-container {
+        text-align: left; /* Il contenuto interno rimane a sinistra */
+        line-height: 1.4em;
         padding-top: 5px;
     }
     .pagellino-container ul {
         list-style: none;
         padding: 0;
-        margin: 6px 0; /* Ulteriore riduzione margine sopra e sotto le liste */
+        margin: 6px 0;
     }
     .pagellino-container ul li {
-        margin-bottom: 0px; /* Quasi nessun margine per le voci di lista */
-        font-size: 0.9em; /* Riduci dimensione testo delle voci */
+        margin-bottom: 0px;
+        font-size: 0.9em;
     }
     .pagellino-container .medaglia {
-        font-size: 1.1em; /* Ulteriore riduzione dimensione medaglia */
-        margin-right: 3px; /* Ulteriore riduzione margine destro */
+        font-size: 1.1em;
+        margin-right: 3px;
+        color: gold; 
     }
+    .pagellino-container .medaglia.silver {
+        color: silver;
+    }
+    .pagellino-container .medaglia.bronze {
+        color: #cd7f32; /* Bronze color */
+    }
+
     .pagellino-container .mvp {
-        font-size: 1.4em; /* Ulteriore riduzione dimensione MVP */
+        font-size: 1.4em;
         font-weight: bold;
         color: #FFD700;
-        margin-top: 12px; /* Ulteriore riduzione margine superiore */
+        margin-top: 12px;
         border-top: 1px solid #0f0;
-        padding-top: 8px; /* Ulteriore riduzione padding superiore */
+        padding-top: 8px;
         text-align: center;
     }
+    /* Nuovi contenitori per dividere le notizie */
+    .sezione-notizie-testuali, .sezione-pagellini {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    /* Assicurati che i sottotitoli siano allineati a sinistra */
+    .sezione-notizie-testuali h3, .sezione-pagellini h3 {
+        width: 100%; /* Occupano tutta la larghezza per stare sopra le card */
+        text-align: center;
+        color: #0f0;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 20px;
+    }
+
 
     .storia-sezione {
       max-width: 500px; /* Override per questa card */
@@ -483,7 +516,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         border: 1px solid #0f0;
         text-align: left;
-        flex: 1; /* Permette alla lista di espandersi */
+        flex: 1; /* Permette alla lista di espandarsi */
         min-width: 300px;
         max-width: 450px;
     }
@@ -639,6 +672,10 @@
           align-items: center;
           gap: 20px;
       }
+      /* Anche le sezioni di notizie devono impilarsi verticalmente */
+      .sezione-notizie-testuali, .sezione-pagellini {
+        flex-direction: column;
+      }
     }
 
     /* Stili per schermi di smartphone molto piccoli (fino a 480px) */
@@ -762,24 +799,20 @@
           <h2>Statistiche Giocatori</h2>
           <div class="contenuto statistiche-container">
               <div class="statistiche-list">
-                  <h3>Record Squadra</h3>
-                  <ul>
-                      
-</ul>
                   <h3>Gol e Assist Totali</h3>
                   <ul>
-                      <li><strong>Cristian:</strong> 137 Gol, 60 Assist</li>
+                      <li><strong>Cristian:</strong> 157 Gol, 66 Assist</li>
                       <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
-                      <li><strong>Vinci:</strong> 42 Gol, 50 Assist</li>
-                      <li><strong>Davide:</strong> 24 Gol, 54 Assist</li>
+                      <li><strong>Vinci:</strong> 52 Gol, 58 Assist</li>
+                      <li><strong>Davide:</strong> 27 Gol, 57 Assist</li>
                       <li><strong>Giovanni:</strong> 8 Gol, 8 Assist</li>
                       <li><strong>Ciccio 😬:</strong> 2 Gol, 2 Assist</li>
-                      <li><strong>Nicolò 🥶:</strong> 10 Gol, 4 Assist</li>
-                      <li><strong>Stefano:</strong> 9 Gol, 5 Assist</li>
+                      <li><strong>Nicolò 🥶:</strong> 10 Gol, 21 Assist</li>
+                      <li><strong>Stefano:</strong> 11 Gol, 9 Assist</li>
                       <li><strong>Giulio:</strong> 44 Gol, 29 Assist</li>
                       <li><strong>Luca:</strong> 7 Gol, 5 Assist</li>
-                      <li><strong>Andres:</strong> 71 Gol, 67 Assist</li>
-                      <li><strong>Lorenzo:</strong> 24 Gol, 14 Assist</li>
+                      <li><strong>Andres:</strong> 76 Gol, 74 Assist</li>
+                      <li><strong>Lorenzo:</strong> 40 Gol, 24 Assist</li>
                       <li><strong>Ciccio.:</strong> 1 Assist</li>
                   </ul>
               </div>
@@ -793,35 +826,43 @@
               <div class="premiazioni-classifica">
                   <h3>Classifica Marcatori</h3>
                   <ol>
-                      <li>Cristian Marchetti: <span>137 Gol</span></li>
+                      <li>Cristian Marchetti: <span>157 Gol</span></li>
                       <li>Emanuele Licco: <span>92 Gol</span></li>
-                      <li>Andres Marchetti: <span>71 Gol</span></li>
+                      <li>Andres Marchetti: <span>76 Gol</span></li>
                   </ol>
               </div>
               <div class="premiazioni-classifica">
                   <h3>Classifica Assist-man</h3>
                   <ol>
-                      <li>Andres Marchetti: <span>67 Assist</span></li>
+                      <li>Andres Marchetti: <span>74 Assist</span></li>
+                      <li>Cristian Marchetti: <span>66 Assist</span></li>
+                      <li>Vincenzo Spadola: <span>58 Assist</span></li>
                       <li>Emanuele Licco: <span>58 Assist</span></li>
-                      <li>Davide Ferrera: <span>54 Assist</span></li>
                   </ol>
               </div>
-              <div class="premiazioni-classifica">
+              <div class="premiazioni-classifica mvp-classifica">
                   <h3>Pallone d'Oro (MVP)</h3>
                   <ol>
-                      <li>Cristian Marchetti: <span>5 MVP</span></li>
-                      <li>Andres Marchetti: <span>3 MVP</span></li>
+                      <li>Cristian Marchetti: <span>7 MVP</span></li>
+                      <li>Andres Marchetti: <span>4 MVP</span></li>
                       <li>Lorenzo Marchetti: <span>2 MVP</span></li>
+                      <li>Giulio Campo: <span>1 MVP</span></li>
                   </ol>
               </div>
           </div>
       </section>
 
       <section id="notizie">
-        <h2>Ultime Notizie</h2>
-        <div class="contenuto">
-            
-<div class="notizia-item">
+        <h2>Notizie dal Campo</h2>
+
+        <div class="sezione-notizie-testuali">
+            <h3>Ultime Notizie</h3>
+            <div class="notizia-item">
+                <h3>Spadola Raggiunge Licco nella Classifica Assist-man!</h3>
+                <p>Grande traguardo per il nostro centrocampista Vincenzo Spadola, che con un'altra prestazione eccezionale ha raggiunto Emanuele Licco a quota 58 assist totali! Questo risultato lo posiziona attualmente al terzo posto nella classifica dei migliori assist-man del Bear F.C., a pari merito con Licco. Un contributo fondamentale per il nostro attacco!</p>
+                <small>Data: 4 Luglio 2025</small>
+            </div>
+            <div class="notizia-item">
                 <h3>Partita Ricca di Emozioni alla Smigo Arena</h3>
                 <p>È stata una partita ricca di emozioni nella Smigo Arena. Nonostante una forte pioggia, che non ha fermato i nostri giocatori dal cercare la vittoria, la squadra ha dato il massimo. Il Bomber ha debuttato con un incredibile poker di gol, offrendo una grande prestazione. Ma su tutti si è distinto Lorenzo Marchetti con una prestazione incredibile, segnando ben 11 gol, incluso un eurogol memorabile.</p>
                 <small>Data: 25 Giugno 2025</small>
@@ -831,11 +872,81 @@
                 <p>Dopo due mesi di stop forzato a causa di un infortunio, il nostro centrocampista Giovanni Cascone ha annunciato il suo ritorno in campo per la partita di domani. Un rientro attesissimo che rafforza la squadra!</p>
                 <small>Data: 20 Giugno 2025</small>
             </div>
-            
-<div class="notizia-item pagellino">
-                <h3>Pagellino Partita Sabato 14 Giugno</h3>
+        </div>
+
+        <div class="sezione-pagellini">
+            <h3>Pagellini Recenti</h3>
+            <div class="notizia-item pagellino">
+                <h3>Pagellino Partita Giovedì 3 Luglio</h3>
                 <div class="pagellino-container">
                     <p>Un'altra grande giornata di calcio per il Bear F.C., con prestazioni individuali di alto livello! Ecco i voti della partita:</p>
+                    <ul>
+                        <li><strong>Vincenzo:</strong> 8</li>
+                        <li><strong>Stefano:</strong> 8-</li>
+                        <li><strong>Cristian:</strong> 9</li>
+                        <li><strong>Lorenzo:</strong> 8 e mezzo</li>
+                        <li><strong>Davide:</strong> 7 e mezzo</li>
+                    </ul>
+                    <p>Ecco i nostri podi della giornata:</p>
+                    <ul>
+                        <li><span class="medaglia">🏅</span> Cristian</li>
+                        <li><span class="medaglia silver">🥈</span> Lorenzo</li>
+                        <li><span class="medaglia bronze">🥉</span> Vincenzo</li>
+                    </ul>
+                    <p class="mvp">MVP 🏅 CRISTIAN</p>
+                </div>
+                <small>Data: 3 Luglio 2025</small>
+            </div>
+            <div class="notizia-item pagellino">
+                <h3>Pagellino Partita Venerdì 28 Giugno</h3>
+                <div class="pagellino-container">
+                    <p>Una partita combattuta e ricca di spunti, dove ogni giocatore ha dato il massimo per la squadra. Ottime le prestazioni individuali che hanno contribuito a un risultato positivo!</p>
+                    <ul>
+                        <li><strong>Lorenzo:</strong> 9</li>
+                        <li><strong>Cristian:</strong> 9 e mezzo</li>
+                        <li><strong>Stefano:</strong> 6+</li>
+                        <li><strong>Vincenzo:</strong> 8</li>
+                        <li><strong>Davide:</strong> 7 e mezzo</li>
+                        <li><strong>Andres:</strong> 9-</li>
+                        <li><strong>Nicolò:</strong> 7+</li>
+                    </ul>
+                    <p>Ecco i nostri podi della giornata:</p>
+                    <ul>
+                        <li><span class="medaglia">🏅</span> Cristian</li>
+                        <li><span class="medaglia silver">🥈</span> Lorenzo</li>
+                        <li><span class="medaglia bronze">🥉</span> Andres</li>
+                    </ul>
+                    <p class="mvp">MVP 🏅 CRISTIAN</p>
+                </div>
+                <small>Data: 28 Giugno 2025</small>
+            </div>
+            <div class="notizia-item pagellino">
+                <h3>Pagellino Partita Sabato 21 Giugno</h3>
+                <div class="pagellino-container">
+                    <p>Prestazioni stellari e grande affiatamento in campo! Tutti i giocatori hanno brillato, dimostrando un'intesa perfetta e un impegno costante per la vittoria.</p>
+                    <ul>
+                        <li><strong>Lorenzo:</strong> 9 e mezzo</li>
+                        <li><strong>Andres:</strong> 9+</li>
+                        <li><strong>Vincenzo:</strong> 8 e mezzo</li>
+                        <li><strong>Cristian:</strong> 9</li>
+                        <li><strong>Stefano:</strong> 8 e mezzo</li>
+                        <li><strong>Giovanni:</strong> 8</li>
+                        <li><strong>Nicolò:</strong> 8-</li>
+                    </ul>
+                    <p>Ecco i nostri podi della giornata:</p>
+                    <ul>
+                        <li><span class="medaglia">🏅</span> Lorenzo</li>
+                        <li><span class="medaglia">🏅</span> Andres</li>
+                        <li><span class="medaglia">🏅</span> Cristian</li>
+                    </ul>
+                    <p class="mvp">MVP 🏅 LORENZO</p>
+                </div>
+                <small>Data: 21 Giugno 2025</small>
+            </div>
+            <div class="notizia-item pagellino">
+                <h3>Pagellino Partita Sabato 14 Giugno</h3>
+                <div class="pagellino-container">
+                    <p>Una partita dominata dalla nostra difesa e da un attacco incisivo. Ogni giocatore ha contribuito con determinazione, portando a casa un risultato meritato e mostrando grande spirito di squadra.</p>
                     <ul>
                         <li><strong>Vincenzo:</strong> 7</li>
                         <li><strong>Stefano:</strong> 8-</li>
@@ -855,30 +966,6 @@
                     <p class="mvp">MVP 🏅 CRISTIAN</p>
                 </div>
                 <small>Data: 14 Giugno 2025</small>
-            </div>
-            
-<div class="notizia-item pagellino">
-                <h3>Pagellino Partita Sabato 21 Giugno</h3>
-                <div class="pagellino-container">
-                    <p>Una partita eccezionale per il Bear F.C., con prestazioni individuali di alto livello! Ecco i voti della partita:</p>
-                    <ul>
-                        <li><strong>Lorenzo:</strong> 9 e mezzo</li>
-                        <li><strong>Andres:</strong> 9+</li>
-                        <li><strong>Vincenzo:</strong> 8 e mezzo</li>
-                        <li><strong>Cristian:</strong> 9</li>
-                        <li><strong>Stefano:</strong> 8 e mezzo</li>
-                        <li><strong>Giovanni:</strong> 8</li>
-                        <li><strong>Nicolò:</strong> 8-</li>
-                    </ul>
-                    <p>Ecco i nostri podi della giornata:</p>
-                    <ul>
-                        <li><span class="medaglia">🏅</span> Lorenzo</li>
-                        <li><span class="medaglia">🏅</span> Andres</li>
-                        <li><span class="medaglia">🏅</span> Cristian</li>
-                    </ul>
-                    <p class="mvp">MVP 🏅 LORENZO</p>
-                </div>
-                <small>Data: 21 Giugno 2025</small>
             </div>
         </div>
       </section>
