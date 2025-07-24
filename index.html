@@ -359,6 +359,21 @@
       margin-top: 8px;
       font-size: 0.75em;
     }
+    /* Stile per le liste all'interno delle notizie */
+    .notizia-item ul {
+        list-style-type: disc; /* Punti per la lista */
+        margin-left: 20px; /* Rientro per la lista */
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .notizia-item ul li {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+    .notizia-item ul li strong {
+        color: #0f0; /* Colore verde per il nome del vincitore */
+    }
+
 
     /* Stile specifico per il pagellino, più piccolo in altezza e larghezza */
     .notizia-item.pagellino {
@@ -801,17 +816,17 @@
               <div class="statistiche-list">
                   <h3>Gol e Assist Totali</h3>
                   <ul>
-                      <li><strong>Cristian:</strong> 157 Gol, 66 Assist</li>
+                      <li><strong>Cristian:</strong> 164 Gol, 71 Assist</li>
                       <li><strong>Licco:</strong> 92 Gol, 58 Assist</li>
-                      <li><strong>Vinci:</strong> 52 Gol, 58 Assist</li>
+                      <li><strong>Vinci:</strong> 56 Gol, 62 Assist</li>
                       <li><strong>Davide:</strong> 27 Gol, 57 Assist</li>
                       <li><strong>Giovanni:</strong> 8 Gol, 8 Assist</li>
                       <li><strong>Ciccio 😬:</strong> 2 Gol, 2 Assist</li>
-                      <li><strong>Nicolò 🥶:</strong> 10 Gol, 21 Assist</li>
-                      <li><strong>Stefano:</strong> 11 Gol, 9 Assist</li>
+                      <li><strong>Nicolò 🥶:</strong> 11 Gol, 22 Assist</li>
+                      <li><strong>Stefano:</strong> 13 Gol, 10 Assist</li>
                       <li><strong>Giulio:</strong> 44 Gol, 29 Assist</li>
                       <li><strong>Luca:</strong> 7 Gol, 5 Assist</li>
-                      <li><strong>Andres:</strong> 76 Gol, 74 Assist</li>
+                      <li><strong>Andres:</strong> 84 Gol, 85 Assist</li>
                       <li><strong>Lorenzo:</strong> 40 Gol, 24 Assist</li>
                       <li><strong>Ciccio.:</strong> 1 Assist</li>
                   </ul>
@@ -826,18 +841,17 @@
               <div class="premiazioni-classifica">
                   <h3>Classifica Marcatori</h3>
                   <ol>
-                      <li>Cristian Marchetti: <span>157 Gol</span></li>
+                      <li>Cristian Marchetti: <span>164 Gol</span></li>
                       <li>Emanuele Licco: <span>92 Gol</span></li>
-                      <li>Andres Marchetti: <span>76 Gol</span></li>
+                      <li>Andres Marchetti: <span>84 Gol</span></li>
                   </ol>
               </div>
               <div class="premiazioni-classifica">
                   <h3>Classifica Assist-man</h3>
                   <ol>
-                      <li>Andres Marchetti: <span>74 Assist</span></li>
-                      <li>Cristian Marchetti: <span>66 Assist</span></li>
-                      <li>Vincenzo Spadola: <span>58 Assist</span></li>
-                      <li>Emanuele Licco: <span>58 Assist</span></li>
+                      <li>Andres Marchetti: <span>85 Assist</span></li>
+                      <li>Cristian Marchetti: <span>71 Assist</span></li>
+                      <li>Vincenzo Spadola: <span>62 Assist</span></li>
                   </ol>
               </div>
               <div class="premiazioni-classifica mvp-classifica">
@@ -858,9 +872,20 @@
         <div class="sezione-notizie-testuali">
             <h3>Ultime Notizie</h3>
             <div class="notizia-item">
-                <h3>Spadola Raggiunge Licco nella Classifica Assist-man!</h3>
-                <p>Grande traguardo per il nostro centrocampista Vincenzo Spadola, che con un'altra prestazione eccezionale ha raggiunto Emanuele Licco a quota 58 assist totali! Questo risultato lo posiziona attualmente al terzo posto nella classifica dei migliori assist-man del Bear F.C., a pari merito con Licco. Un contributo fondamentale per il nostro attacco!</p>
-                <small>Data: 4 Luglio 2025</small>
+                <h3>Fine Stagione: Un Bilancio Positivo e le Premiazioni per il Bear F.C.!</h3>
+                <p>Si conclude una stagione ricca di emozioni e successi per il Bear F.C.! La squadra ha dimostrato grande impegno e spirito di sacrificio in ogni partita, raggiungendo traguardi importanti e regalando ai tifosi momenti indimenticabili. Un ringraziamento speciale a tutti i giocatori per la loro dedizione e ai nostri fantastici tifosi per il supporto costante. Siamo orgogliosi di annunciare i vincitori dei premi stagionali:</p>
+                <ul>
+                    <li>**Capocannoniere:** Cristian Marchetti con 164 gol</li>
+                    <li>**Miglior Assist-man:** Andres Marchetti con 85 assist</li>
+                    <li>**Pallone d'Oro (MVP):** Cristian Marchetti, riconosciuto come il Most Valuable Player</li>
+                </ul>
+                <p>Ci vediamo la prossima stagione, più forti che mai!</p>
+                <small>Data: 24 Luglio 2025</small>
+            </div>
+            <div class="notizia-item">
+                <h3>Spadola Raggiunge il 3° Posto nella Classifica Assist-man!</h3>
+                <p>Grande traguardo per il nostro centrocampista Vincenzo Spadola, che con un'altra prestazione eccezionale ha raggiunto quota 62 assist totali! Questo risultato lo posiziona ora da solo al terzo posto nella classifica dei migliori assist-man del Bear F.C., superando Emanuele Licco. Un contributo fondamentale per il nostro attacco!</p>
+                <small>Data: 20 Luglio 2025</small>
             </div>
             <div class="notizia-item">
                 <h3>Partita Ricca di Emozioni alla Smigo Arena</h3>
@@ -1013,7 +1038,7 @@
     </footer>
   </div> 
 <script>
-    const passwordCorretta = "amicibearfc"; // <<< CAMBIA QUI LA TUAPASSWORD!
+    const passwordCorretta = "amicibearfc"; // <<< CAMBIA QUI LA TUA PASSWORD!
 
     // Funzione per mostrare l'animazione dell'orso e poi rivelare il contenuto
     function showIntroAndRevealContent() {
